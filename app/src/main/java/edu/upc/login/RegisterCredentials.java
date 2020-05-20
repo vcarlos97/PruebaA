@@ -2,9 +2,10 @@ package edu.upc.login;
 
 public class RegisterCredentials {
 
-    private String nombre;
-    private String mail;
-    private String password;
+    public String nombre;
+    public String mail;
+    public String password;
+    public String confirmPassword;
 
     public String getNombre() {
         return nombre;
@@ -18,13 +19,18 @@ public class RegisterCredentials {
         return password;
     }
 
+    public String getConfirmPassword() {
+        return confirmPassword;
+    }
+
     public RegisterCredentials(){}
 
-    public RegisterCredentials(String nombre, String mail, String password) {
+    public RegisterCredentials(String nombre, String mail, String password,String confirmPassword) {
         this();
         this.nombre = nombre;
         this.mail = mail;
         this.password = password;
+        this.confirmPassword=confirmPassword;
     }
 
     public void setNombre(String nombre) {
@@ -37,8 +43,5 @@ public class RegisterCredentials {
         this.password = password;
     }
 
-
-
-
-
+    public void setConfirmPassword(String confirmPassword) {this.confirmPassword = confirmPassword; }
 }

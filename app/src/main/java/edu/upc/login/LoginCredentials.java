@@ -2,8 +2,10 @@ package edu.upc.login;
 
 public class LoginCredentials {
 
-    private String nombre;
-    private  String password;
+
+    public String nombre;
+    public String password;
+
 
     public String getNombre() {
         return nombre;
@@ -13,14 +15,15 @@ public class LoginCredentials {
         return password;
     }
 
-    public LoginCredentials(){
+    public LoginCredentials() {
 
     }
 
-    public LoginCredentials(String nombre, String password){
 
-        this.nombre=nombre;
-        this.password=password;
+    public LoginCredentials(String nombre, String password) {
+        this.nombre = nombre;
+
+        this.password = password;
     }
 
     public void setNombre(String nombre) {
@@ -32,3 +35,4 @@ public class LoginCredentials {
     }
 
 }
+
