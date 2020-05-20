@@ -19,7 +19,7 @@ import retrofit2.Callback;
 import retrofit2.Response;
 import retrofit2.Retrofit;
 import retrofit2.converter.gson.GsonConverterFactory;
-
+//preguntar como arreglar tema de diseño en el layout,
 public class MainActivity extends Activity {
 
     private API api;
@@ -53,6 +53,14 @@ public class MainActivity extends Activity {
 
         final TextView nombre = findViewById((R.id.nombreText));
         final TextView password = findViewById((R.id.passwordText));
+        Button registrarseButton = findViewById(R.id.registrarseButton);
+        registrarseButton.setOnClickListener(new View.OnClickListener() {
+            @Override
+            public void onClick(View v) {
+                Intent i=new Intent(MainActivity.this,RegisterActivity.class);
+                startActivity(i);
+            }
+        });
         Button loginButton = findViewById(R.id.loginButton);
         loginButton.setOnClickListener(new View.OnClickListener() {
             @Override
@@ -61,9 +69,9 @@ public class MainActivity extends Activity {
                 loginc.setNombre((String) nombre.getText());
                 loginc.setPassword((String) password.getText());
 
-                Call<LoginCredentials> trackCall = api.login(loginc);
+                Call<LoginCredentials> call = api.login(loginc);
 
-                trackCall.enqueue(new Callback<LoginCredentials>() {
+                call.enqueue(new Callback<LoginCredentials>() {
                     @Override
                     public void onResponse(Call<LoginCredentials> call, Response<LoginCredentials> response) {
                         if(response.isSuccessful()) {

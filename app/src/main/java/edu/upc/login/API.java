@@ -22,4 +22,7 @@ public interface API {
 @POST("auth")
     Call<LoginCredentials> login(@Body LoginCredentials loginCredentials);
 
+@POST("auth")
+    Call<RegisterCredentials> register(@Body RegisterCredentials registerCredentials);
+
 }
