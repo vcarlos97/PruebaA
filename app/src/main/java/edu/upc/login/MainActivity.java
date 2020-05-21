@@ -61,7 +61,7 @@ public class MainActivity extends Activity {
         });
 
         Button loginButton = findViewById(R.id.loginButton);
-        //Cuando clickamos en loginButton -> Creamos llamamos a los strings nombre y password, los metemos en objeto loginCredientials y lo enviamos.
+        //Cuando clickamos en loginButton -> Creamos llamamos a los strings nombre y password, los metemos en variable login
         loginButton.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View v) {
