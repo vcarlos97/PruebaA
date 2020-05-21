@@ -8,11 +8,7 @@ import android.widget.Button;
 import android.widget.TextView;
 import android.widget.Toast;
 
-
 import androidx.appcompat.app.AppCompatActivity;
-
-import java.util.List;
-
 
 import okhttp3.OkHttpClient;
 import okhttp3.logging.HttpLoggingInterceptor;
@@ -30,7 +26,7 @@ public class RegisterActivity extends AppCompatActivity {
     @Override
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
-        setContentView(R.layout.activity_main);
+        setContentView(R.layout.activity_register);
 
         //Creamos interceptor
         HttpLoggingInterceptor interceptor = new HttpLoggingInterceptor();
@@ -66,6 +62,25 @@ public class RegisterActivity extends AppCompatActivity {
                    registerC.setPassword((String) confPassword.getText());
 
                    Call<RegisterCredentials> call = api.register(registerC);
+                    call.enqueue(new Callback<RegisterCredentials>() {
+                        @Override
+                        public void onResponse(Call<RegisterCredentials> call, Response<RegisterCredentials> response) {
+                            if(response.isSuccessful()) {
+                                Intent i = new Intent(RegisterActivity.this, HomeActivity.class);
+                                startActivity(i);
+                            }
+
+                            else {
+                                Toast.makeText(getApplicationContext(), "Error " + response.code() + ": " +response.message(), Toast.LENGTH_SHORT).show();
+                            }
+                        }
+
+                        @Override
+                        public void onFailure(Call<RegisterCredentials> call, Throwable t) {
+                            Toast toast = Toast.makeText(getApplicationContext(), "Error al acceder a la API", Toast.LENGTH_SHORT);
+                            toast.show();
+                        }
+                    });
 
 
                 }

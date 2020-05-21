@@ -8,10 +8,6 @@ import android.widget.Button;
 import android.widget.TextView;
 import android.widget.Toast;
 
-
-import java.util.List;
-
-
 import okhttp3.OkHttpClient;
 import okhttp3.logging.HttpLoggingInterceptor;
 import retrofit2.Call;
@@ -19,6 +15,8 @@ import retrofit2.Callback;
 import retrofit2.Response;
 import retrofit2.Retrofit;
 import retrofit2.converter.gson.GsonConverterFactory;
+
+
 //preguntar como arreglar tema de diseño en el layout,
 public class MainActivity extends Activity {
 
@@ -50,7 +48,7 @@ public class MainActivity extends Activity {
         //Llamamos a servicios que hemos definido en la API
         api = retrofit.create(API.class);
 
-
+        //Inicializamos el LayOut
         final TextView nombre = findViewById((R.id.nombreText));
         final TextView password = findViewById((R.id.passwordText));
         Button registrarseButton = findViewById(R.id.registrarseButton);
@@ -61,7 +59,9 @@ public class MainActivity extends Activity {
                 startActivity(i);
             }
         });
+
         Button loginButton = findViewById(R.id.loginButton);
+        //Cuando clickamos en loginButton -> Creamos llamamos a los strings nombre y password, los metemos en objeto loginCredientials y lo enviamos.
         loginButton.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View v) {
