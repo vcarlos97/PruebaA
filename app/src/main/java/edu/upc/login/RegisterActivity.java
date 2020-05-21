@@ -51,15 +51,15 @@ public class RegisterActivity extends AppCompatActivity {
         final TextView mail = findViewById(R.id.correoText);
         final TextView password = findViewById(R.id.contraseñaText);
         final TextView confPassword = findViewById(R.id.confContraseñaText);
-        Button registrarseButton = findViewById(R.id.registrarseButton);
+        Button registrarseButton = findViewById(R.id.regButton);
             registrarseButton.setOnClickListener(new View.OnClickListener() {
                 @Override
                 public void onClick(View v) {
                    RegisterCredentials registerC = new RegisterCredentials();
                    registerC.setNombre((String) nombre.getText());
-                   registerC.setNombre((String) mail.getText());
+                   registerC.setMail((String) mail.getText());
                    registerC.setPassword((String) password.getText());
-                   registerC.setPassword((String) confPassword.getText());
+                   registerC.setConfirmPassword((String) confPassword.getText());
 
                    Call<RegisterCredentials> call = api.register(registerC);
                     call.enqueue(new Callback<RegisterCredentials>() {
