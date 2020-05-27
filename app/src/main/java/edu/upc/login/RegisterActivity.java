@@ -56,10 +56,10 @@ public class RegisterActivity extends AppCompatActivity {
                 @Override
                 public void onClick(View v) {
                    RegisterCredentials registerC = new RegisterCredentials();
-                   registerC.setNombre((String) nombre.getText());
-                   registerC.setMail((String) mail.getText());
-                   registerC.setPassword((String) password.getText());
-                   registerC.setConfirmPassword((String) confPassword.getText());
+                   registerC.setNombre((String) nombre.getText().toString());
+                   registerC.setMail((String) mail.getText().toString());
+                   registerC.setPassword((String) password.getText().toString());
+                   registerC.setConfirmPassword((String) confPassword.getText().toString());
 
                    Call<RegisterCredentials> call = api.register(registerC);
                     call.enqueue(new Callback<RegisterCredentials>() {

@@ -76,8 +76,8 @@ public class MainActivity extends Activity {
             @Override
             public void onClick(View v) {
                 LoginCredentials loginc = new LoginCredentials();
-                loginc.setNombre((String) nombre.getText());
-                loginc.setPassword((String) password.getText());
+                loginc.setNombre((String) nombre.getText().toString());
+                loginc.setPassword((String) password.getText().toString());
 
                 Call<LoginCredentials> call = api.login(loginc);
 
