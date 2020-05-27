@@ -60,14 +60,7 @@ public class MainActivity extends Activity {
             }
         });
 
-        Button pruebaHome = findViewById(R.id.pruebaHome);
-        pruebaHome.setOnClickListener(new View.OnClickListener() {
-            @Override
-            public void onClick(View v) {
-                Intent i=new Intent(MainActivity.this,HomeActivity.class);
-                startActivity(i);
-            }
-        });
+
 
 
         Button loginButton = findViewById(R.id.loginButton);
