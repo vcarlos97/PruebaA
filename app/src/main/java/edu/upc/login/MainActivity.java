@@ -40,7 +40,7 @@ public class MainActivity extends Activity {
 
         //Crear retrofit
         final Retrofit retrofit = new Retrofit.Builder()
-                .baseUrl("http://147.83.7.203:8080/dsaApp/")
+                .baseUrl("http://localhost:8080/dsaApp/")
                 .addConverterFactory(GsonConverterFactory.create())
                 .client(client)
                 .build();
@@ -59,6 +59,16 @@ public class MainActivity extends Activity {
                 startActivity(i);
             }
         });
+
+        Button pruebaHome = findViewById(R.id.pruebaHome);
+        pruebaHome.setOnClickListener(new View.OnClickListener() {
+            @Override
+            public void onClick(View v) {
+                Intent i=new Intent(MainActivity.this,HomeActivity.class);
+                startActivity(i);
+            }
+        });
+
 
         Button loginButton = findViewById(R.id.loginButton);
         //Cuando clickamos en loginButton -> Creamos llamamos a los strings nombre y password, los metemos en variable login

@@ -1,0 +1,30 @@
+<?xml version="1.0" encoding="utf-8"?>
+<menu xmlns:android="http://schemas.android.com/apk/res/android">
+    <item android:title="Menu">
+
+        <menu>
+            <item
+                android:id="@+id/home"
+                android:icon="@drawable/ic_home"
+                android:title="Home"></item>
+
+            <item
+                android:id="@+id/items"
+                android:icon="@drawable/ic_carrito"
+                android:title="Items"></item>
+
+            <item
+                android:id="@+id/statistics"
+                android:icon="@drawable/ic_estadisticas"
+                android:title="Estadísticas"></item>
+
+            <item
+                android:id="@+id/enemies"
+                android:icon="@drawable/ic_enemigos"
+                android:title="Enemigos"></item>
+        </menu>
+
+    </item>
+
+
+</menu>

@@ -39,7 +39,7 @@ public class RegisterActivity extends AppCompatActivity {
 
         //Crear retrofit
         final Retrofit retrofit = new Retrofit.Builder()
-                .baseUrl("http://147.83.7.203:8080/dsaApp/")
+                .baseUrl("http://localhost:8080/dsaApp/")
                 .addConverterFactory(GsonConverterFactory.create())
                 .client(client)
                 .build();
