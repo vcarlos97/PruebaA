@@ -39,7 +39,7 @@ public class RegisterActivity extends AppCompatActivity {
 
         //Crear retrofit
         final Retrofit retrofit = new Retrofit.Builder()
-                .baseUrl("http://localhost:8080/dsaApp/")
+                .baseUrl("http://147.83.7.203:8080/dsaApp/")
                 .addConverterFactory(GsonConverterFactory.create())
                 .client(client)
                 .build();
@@ -59,7 +59,7 @@ public class RegisterActivity extends AppCompatActivity {
                    registerC.setNombre((String) nombre.getText().toString());
                    registerC.setMail((String) mail.getText().toString());
                    registerC.setPassword((String) password.getText().toString());
-                   registerC.setConfirmPassword((String) confPassword.getText().toString());
+                   registerC.setConfirm((String) confPassword.getText().toString());
 
                    Call<RegisterCredentials> call = api.register(registerC);
                     call.enqueue(new Callback<RegisterCredentials>() {

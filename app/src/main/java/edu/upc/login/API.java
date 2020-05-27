@@ -19,10 +19,10 @@ public interface API {
     @DELETE("tracks/{id}")
     Call<Void> deleteTrack (@Path("id") String id);
 */
-@POST("auth")
+@POST("auth/login")
     Call<LoginCredentials> login(@Body LoginCredentials loginCredentials);
 
-@POST("auth")
+@POST("auth/register")
     Call<RegisterCredentials> register(@Body RegisterCredentials registerCredentials);
 
 }

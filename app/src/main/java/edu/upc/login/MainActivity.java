@@ -40,7 +40,7 @@ public class MainActivity extends Activity {
 
         //Crear retrofit
         final Retrofit retrofit = new Retrofit.Builder()
-                .baseUrl("http://localhost:8080/dsaApp/")
+                .baseUrl("http://147.83.7.203:8080/dsaApp/")
                 .addConverterFactory(GsonConverterFactory.create())
                 .client(client)
                 .build();
@@ -98,7 +98,7 @@ public class MainActivity extends Activity {
                     public void onFailure(Call<LoginCredentials> call, Throwable t) {
                         Toast toast = Toast.makeText(getApplicationContext(), "Error al acceder a la API", Toast.LENGTH_SHORT);
                         toast.show();
-                    }
+                }
                 });
             }
 
