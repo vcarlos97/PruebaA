@@ -1,5 +1,7 @@
 package edu.upc.login.Fragments;
 
+import android.app.Activity;
+import android.content.Context;
 import android.os.Bundle;
 import android.view.LayoutInflater;
 import android.view.View;
@@ -14,6 +16,7 @@ import androidx.recyclerview.widget.RecyclerView;
 
 import java.util.ArrayList;
 
+import edu.upc.login.iComunicaFragments;
 import edu.upc.login.Adaptadores.AdapterItem;
 import edu.upc.login.Entidades.Item;
 import edu.upc.login.R;
@@ -23,6 +26,10 @@ public class FragmentItems extends Fragment {
     AdapterItem adapterItem;
     RecyclerView recyclerViewItems;
     ArrayList<Item> listaItems;
+
+    //referencias para comunicar fragment
+    Activity actividad;
+    iComunicaFragments interfaceComunicaFragments;
 
     @Nullable
     @Override
@@ -58,7 +65,22 @@ public class FragmentItems extends Fragment {
             public void onClick(View view) {
                 String nombre = listaItems.get(recyclerViewItems.getChildAdapterPosition(view)).getNombre();
                 Toast.makeText(getContext(),"Seleccionó: "+nombre,Toast.LENGTH_SHORT).show();
+                interfaceComunicaFragments.enviarObjeto(listaItems.get(recyclerViewItems.getChildAdapterPosition(view)));
             }
         });
+    }
+
+    @Override
+    public void onAttach(@NonNull Context context) {
+        super.onAttach(context);
+        if(context instanceof Activity){
+            this.actividad=(Activity) context;
+            interfaceComunicaFragments=(iComunicaFragments) this.actividad;
+        }
+    }
+
+    @Override
+    public void onDetach() {
+        super.onDetach();
     }
 }

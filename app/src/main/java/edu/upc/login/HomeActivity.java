@@ -14,12 +14,14 @@ import android.view.MenuItem;
 
 import com.google.android.material.navigation.NavigationView;
 
+import edu.upc.login.Entidades.Item;
+import edu.upc.login.Fragments.DetalleItemFragment;
 import edu.upc.login.Fragments.FragmentEnemigos;
 import edu.upc.login.Fragments.FragmentEstadisticas;
 import edu.upc.login.Fragments.FragmentItems;
 import edu.upc.login.Fragments.MainFragment;
 
-public class HomeActivity extends AppCompatActivity implements NavigationView.OnNavigationItemSelectedListener {
+public class HomeActivity extends AppCompatActivity implements NavigationView.OnNavigationItemSelectedListener, iComunicaFragments {
 
     DrawerLayout drawerLayout;
     ActionBarDrawerToggle actionBarDrawerToggle;
@@ -30,6 +32,9 @@ public class HomeActivity extends AppCompatActivity implements NavigationView.On
 
     FragmentManager fragmentManager;
     FragmentTransaction fragmentTransaction;
+
+    //variables del fragmentdetalle item
+    DetalleItemFragment detalleItemFragment;
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {
@@ -88,5 +93,22 @@ public class HomeActivity extends AppCompatActivity implements NavigationView.On
         }
 
         return false;
+    }
+
+    @Override
+    public void enviarObjeto(Item item) {
+        // Aquí se realiza toda la logica necesaria para poder realizar el envío
+        detalleItemFragment = new DetalleItemFragment();
+        //objeto de tipo bundle para transportar la información
+        Bundle bundleEnvio = new Bundle();
+        //enviar el objeto que está llegando con Serializable
+        bundleEnvio.putSerializable("objeto", item);
+        detalleItemFragment.setArguments(bundleEnvio);
+        //abrir fragment
+        fragmentManager = getSupportFragmentManager();
+        fragmentTransaction = fragmentManager.beginTransaction();
+        fragmentTransaction.replace(R.id.container, detalleItemFragment);
+        fragmentTransaction.addToBackStack(null);
+        fragmentTransaction.commit();
     }
 }
