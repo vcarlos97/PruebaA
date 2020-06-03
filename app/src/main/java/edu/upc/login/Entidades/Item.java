@@ -10,6 +10,7 @@ public class Item implements Serializable {
     public Item (){}
 
     public Item(String nombre, String descripcion, int imagenid) {
+        this();
         this.nombre = nombre;
         this.descripcion = descripcion;
         this.imagenid = imagenid;

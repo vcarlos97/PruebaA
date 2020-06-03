@@ -22,7 +22,7 @@ public class DetalleItemFragment extends Fragment {
     @Nullable
     @Override
     public View onCreateView(@NonNull LayoutInflater inflater, @Nullable ViewGroup container, @Nullable Bundle savedInstanceState){
-        View view = inflater.inflate(R.id.detalle_item_fragment,container,false);
+        View view = inflater.inflate(R.layout.detalle_item_fragment,container,false);
         nombreDetalle=view.findViewById(R.id.nombre_detalle);
         imagenDetalle=view.findViewById(R.id.imagen_detalle);
         //Crear objeto bundle para recibir el objeto enviado por argumentos
