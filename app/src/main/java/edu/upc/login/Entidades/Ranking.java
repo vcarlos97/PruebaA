@@ -5,14 +5,17 @@ import java.io.Serializable;
 public class Ranking implements Serializable {
 
     private String username;
-    private String puntos;
+    private int puntos;
+    private int imagen;
 
     public Ranking(){}
 
-    public Ranking ( String username, String puntos){
+    public Ranking ( String username, int puntos, int imagen){
         this();
         this.username=username;
         this.puntos=puntos;
+        this.imagen=imagen;
+
     }
 
     public String getUsername() {
@@ -23,11 +26,19 @@ public class Ranking implements Serializable {
         this.username = username;
     }
 
-    public String getPuntos() {
+    public int getPuntos() {
         return puntos;
     }
 
-    public void setPuntos(String puntos) {
+    public void setPuntos(int puntos) {
         this.puntos = puntos;
+    }
+
+    public int getImagen() {
+        return imagen;
+    }
+
+    public void setImagen(int imagen) {
+        this.imagen = imagen;
     }
 }

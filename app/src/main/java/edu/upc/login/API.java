@@ -4,6 +4,7 @@ package edu.upc.login;
 
 import java.util.List;
 
+import edu.upc.login.Entidades.Ranking;
 import retrofit2.Call;
 import retrofit2.http.Body;
 import retrofit2.http.GET;
@@ -23,7 +24,7 @@ public interface API {
     Call<Void> deleteTrack (@Path("id") String id);
 */
 @GET("game/ranking")
-Call <List<Ranking>> getRanking();
+Call <RankingRespuesta> getRanking();
 
 @POST("auth/login")
     Call<LoginCredentials> login(@Body LoginCredentials loginCredentials);

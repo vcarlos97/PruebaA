@@ -16,7 +16,9 @@ import com.google.android.material.navigation.NavigationView;
 
 import edu.upc.login.Entidades.Item;
 import edu.upc.login.Fragments.DetalleItemFragment;
-import edu.upc.login.Fragments.FragmentEnemigos;
+import edu.upc.login.Fragments.FragmentCamara;
+import edu.upc.login.Fragments.FragmentInventario;
+import edu.upc.login.Fragments.FragmentPerfil;
 import edu.upc.login.Fragments.FragmentEstadisticas;
 import edu.upc.login.Fragments.FragmentItems;
 import edu.upc.login.Fragments.MainFragment;
@@ -70,6 +72,14 @@ public class HomeActivity extends AppCompatActivity implements NavigationView.On
             fragmentTransaction.commit();
 
         }
+        if(menuItem.getItemId() == R.id.inventario){
+            fragmentManager = getSupportFragmentManager();
+            fragmentTransaction = fragmentManager.beginTransaction();
+            fragmentTransaction.replace(R.id.container, new FragmentInventario());
+            fragmentTransaction.commit();
+
+        }
+
         if(menuItem.getItemId() == R.id.items){
             fragmentManager = getSupportFragmentManager();
             fragmentTransaction = fragmentManager.beginTransaction();
@@ -84,10 +94,17 @@ public class HomeActivity extends AppCompatActivity implements NavigationView.On
             fragmentTransaction.commit();
 
         }
-        if(menuItem.getItemId() == R.id.enemies){
+        if(menuItem.getItemId() == R.id.perfil){
             fragmentManager = getSupportFragmentManager();
             fragmentTransaction = fragmentManager.beginTransaction();
-            fragmentTransaction.replace(R.id.container, new FragmentEnemigos());
+            fragmentTransaction.replace(R.id.container, new FragmentPerfil());
+            fragmentTransaction.commit();
+
+        }
+        if(menuItem.getItemId() == R.id.camara){
+            fragmentManager = getSupportFragmentManager();
+            fragmentTransaction = fragmentManager.beginTransaction();
+            fragmentTransaction.replace(R.id.container, new FragmentCamara());
             fragmentTransaction.commit();
 
         }

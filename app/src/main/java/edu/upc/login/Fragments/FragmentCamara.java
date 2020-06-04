@@ -11,11 +11,11 @@ import androidx.fragment.app.Fragment;
 
 import edu.upc.login.R;
 
-public class FragmentEnemigos extends Fragment {
+public class FragmentCamara extends Fragment {
     @Nullable
     @Override
     public View onCreateView(@NonNull LayoutInflater inflater, @Nullable ViewGroup container, @Nullable Bundle savedInstanceState) {
-        View view  = inflater.inflate(R.layout.enemies_fragment,container,false);
+        View view  = inflater.inflate(R.layout.perfil_fragment,container,false);
         return view;
     }
 }

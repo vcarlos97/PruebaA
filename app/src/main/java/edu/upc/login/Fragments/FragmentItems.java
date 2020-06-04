@@ -27,6 +27,7 @@ public class FragmentItems extends Fragment {
     RecyclerView recyclerViewItems;
     ArrayList<Item> listaItems;
 
+
     //referencias para comunicar fragment
     Activity actividad;
     iComunicaFragments interfaceComunicaFragments;
