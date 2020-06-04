@@ -1,13 +1,16 @@
 package edu.upc.login;
 
 import android.app.Activity;
+import android.content.Context;
 import android.content.Intent;
+import android.content.SharedPreferences;
 import android.os.Bundle;
 import android.view.View;
 import android.widget.Button;
 import android.widget.TextView;
 import android.widget.Toast;
 
+import edu.upc.login.Entidades.Token;
 import okhttp3.OkHttpClient;
 import okhttp3.logging.HttpLoggingInterceptor;
 import retrofit2.Call;
@@ -22,7 +25,26 @@ public class MainActivity extends Activity {
 
     private API api;
 
+    private void guardarToken(String token){
+        //Creamos objeto preferences que se guardara en un XML llamado tokenUsuario y es privado porque
+        //solo podremos acceder mediante nuestra app. Creamos un editor y guardamos el valor que le pasamos
+        //como parametro con la llave "token"
 
+        //Para ver sharedPreferences: device file explorer->data->data->edu.upc.login->shared_prefs
+
+        SharedPreferences preferences = getSharedPreferences("tokenUsuario", Context.MODE_PRIVATE);
+        SharedPreferences.Editor editor = preferences.edit();
+        editor.putString("token", token);
+        editor.commit();
+        //Toast.makeText(getApplicationContext(), token, Toast.LENGTH_SHORT).show();
+    }
+
+    //Funcion que lee SharedPreferences para obtener el token
+    /*private String obtenerToken(){
+        SharedPreferences preferences = getSharedPreferences("tokenUsuario", Context.MODE_PRIVATE);
+        String token = preferences.getString("token", "Login required");
+        return token;
+    }*/
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {
@@ -72,14 +94,17 @@ public class MainActivity extends Activity {
                 loginc.setNombre((String) nombre.getText().toString());
                 loginc.setPassword((String) password.getText().toString());
 
-                Call<LoginCredentials> call = api.login(loginc);
+                Call<Token> call = api.login(loginc);
 
-                call.enqueue(new Callback<LoginCredentials>() {
+                call.enqueue(new Callback<Token>() {
                     @Override
-                    public void onResponse(Call<LoginCredentials> call, Response<LoginCredentials> response) {
+                    public void onResponse(Call<Token> call, Response<Token> response) {
                         if(response.isSuccessful()) {
+                            Token token = response.body();
+                            guardarToken(token.getToken());
                             Intent i = new Intent(MainActivity.this, HomeActivity.class);
                             startActivity(i);
+                            finish();
                         }
 
                         else {
@@ -88,7 +113,7 @@ public class MainActivity extends Activity {
                     }
 
                     @Override
-                    public void onFailure(Call<LoginCredentials> call, Throwable t) {
+                    public void onFailure(Call<Token> call, Throwable t) {
                         Toast toast = Toast.makeText(getApplicationContext(), "Error al acceder a la API", Toast.LENGTH_SHORT);
                         toast.show();
                 }
