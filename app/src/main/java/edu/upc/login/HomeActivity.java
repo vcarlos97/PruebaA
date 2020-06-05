@@ -15,6 +15,7 @@ import android.view.MenuItem;
 import com.google.android.material.navigation.NavigationView;
 
 import edu.upc.login.Entidades.Item;
+import edu.upc.login.Entidades.Ranking;
 import edu.upc.login.Fragments.FragmentItemDetalle;
 import edu.upc.login.Fragments.FragmentCamara;
 import edu.upc.login.Fragments.FragmentInventario;
@@ -71,12 +72,14 @@ public class HomeActivity extends AppCompatActivity implements NavigationView.On
             fragmentTransaction.replace(R.id.container, new FragmentHome());
             fragmentTransaction.commit();
 
+
         }
         if(menuItem.getItemId() == R.id.inventario){
             fragmentManager = getSupportFragmentManager();
             fragmentTransaction = fragmentManager.beginTransaction();
             fragmentTransaction.replace(R.id.container, new FragmentInventario());
             fragmentTransaction.commit();
+
 
         }
 
@@ -109,6 +112,7 @@ public class HomeActivity extends AppCompatActivity implements NavigationView.On
 
         }
 
+
         return false;
     }
 
@@ -127,5 +131,10 @@ public class HomeActivity extends AppCompatActivity implements NavigationView.On
         fragmentTransaction.replace(R.id.container, fragmentItemDetalle);
         fragmentTransaction.addToBackStack(null);
         fragmentTransaction.commit();
+    }
+
+    @Override
+    public void consultarTop() {
+
     }
 }

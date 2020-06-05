@@ -11,20 +11,12 @@ import retrofit2.http.GET;
 import retrofit2.http.POST;
 
 public interface API {
-/*    @GET("tracks")
-    Call<List<User>> getTracks();
 
-    @POST("tracks")
-    Call<User> addTrack (@Body User user);
-
-    @PUT("tracks")
-    Call<Void> updateTrack (@Body User user);
-
-    @DELETE("tracks/{id}")
-    Call<Void> deleteTrack (@Path("id") String id);
-*/
 @GET("game/ranking")
-Call <List<Ranking>> getRanking();
+    Call <List<Ranking>> getRanking();
+
+@GET("game/rankingPersonal")
+    Call<List<Ranking>> getRankingPersonal();
 
 @POST("auth/login")
     Call<LoginCredentials> login(@Body LoginCredentials loginCredentials);

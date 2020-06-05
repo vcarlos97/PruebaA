@@ -1,10 +1,13 @@
 package edu.upc.login.Fragments;
 
+import android.app.Activity;
+import android.content.Context;
 import android.os.Bundle;
 import android.util.Log;
 import android.view.LayoutInflater;
 import android.view.View;
 import android.view.ViewGroup;
+import android.widget.Button;
 
 import androidx.annotation.NonNull;
 import androidx.annotation.Nullable;
@@ -18,6 +21,7 @@ import edu.upc.login.API;
 import edu.upc.login.Adaptadores.AdapterRanking;
 import edu.upc.login.Entidades.Ranking;
 import edu.upc.login.R;
+import edu.upc.login.iComunicaFragments;
 import okhttp3.OkHttpClient;
 import okhttp3.logging.HttpLoggingInterceptor;
 import retrofit2.Call;
@@ -31,6 +35,8 @@ public class FragmentEstadisticas extends Fragment {
     AdapterRanking adapterRanking;
     RecyclerView recyclerViewRanking;
     private API api;
+    Activity actividad;
+    iComunicaFragments interfaceComunicaFragments;
 
 
 
@@ -44,6 +50,56 @@ public class FragmentEstadisticas extends Fragment {
 
         //cargar la lista
         cargarLista();
+        Button top5button = view.findViewById(R.id.top5personal);
+        top5button.setOnClickListener(new View.OnClickListener() {
+            @Override
+            public void onClick(View view) {
+                //Creamos interceptor
+                HttpLoggingInterceptor interceptor = new HttpLoggingInterceptor();
+                interceptor.setLevel(HttpLoggingInterceptor.Level.BODY);
+
+                //Creamos cliente
+                OkHttpClient client = new OkHttpClient.Builder()
+                        .addInterceptor(interceptor)
+                        .build();
+
+                //Crear retrofit
+                final Retrofit retrofit = new Retrofit.Builder()
+                        .baseUrl("http://147.83.7.203:8080/dsaApp/")
+                        .addConverterFactory(GsonConverterFactory.create())
+                        .client(client)
+                        .build();
+
+                //Llamamos a servicios que hemos definido en la API
+                api = retrofit.create(API.class);
+                Call<List<Ranking>> call = api.getRankingPersonal();
+
+                call.enqueue(new Callback<List<Ranking>>() {
+                    @Override
+                    public void onResponse(Call<List<Ranking>> call, Response<List<Ranking>> response) {
+                        if(response.isSuccessful()) {
+                            List<Ranking> rankingRespuesta = response.body();
+                            //listaRanking.addAll(rankingRespuesta);
+                            mostrarDatos(rankingRespuesta);
+
+                        }
+
+                        else {
+                            Log.e("DSA","Error :"+response.errorBody());
+                        }
+                    }
+
+                    @Override
+                    public void onFailure(Call<List<Ranking>> call, Throwable t) {
+                        Log.e("DSA","Error: No se pudo acceder a la API",t);
+
+                    }
+                });
+
+
+
+            }
+        });
 
 
 
@@ -98,6 +154,7 @@ public class FragmentEstadisticas extends Fragment {
         });
 
 
+
     }
     public void mostrarDatos(List<Ranking> listaRanking) {
 
@@ -105,6 +162,21 @@ public class FragmentEstadisticas extends Fragment {
         adapterRanking = new AdapterRanking(getContext(), listaRanking);
         recyclerViewRanking.setAdapter(adapterRanking);
     }
+
+    @Override
+    public void onAttach(@NonNull Context context) {
+        super.onAttach(context);
+        if(context instanceof Activity){
+            this.actividad=(Activity) context;
+            interfaceComunicaFragments=(iComunicaFragments) this.actividad;
+        }
+    }
+
+    @Override
+    public void onDetach() {
+        super.onDetach();
+    }
+
 
 
 
