@@ -4,6 +4,7 @@ import android.app.Activity;
 import android.content.Context;
 import android.content.Intent;
 import android.content.SharedPreferences;
+import android.media.session.MediaSession;
 import android.os.Bundle;
 import android.view.View;
 import android.widget.Button;
@@ -19,10 +20,10 @@ import retrofit2.Retrofit;
 import retrofit2.converter.gson.GsonConverterFactory;
 
 
-//preguntar como arreglar tema de diseño en el layout,
 public class MainActivity extends Activity {
 
     private API api;
+
     private void guardarToken(String token){
         //Creamos objeto preferences que se guardara en un XML llamado tokenUsuario y es privado porque
         //solo podremos acceder mediante nuestra app. Creamos un editor y guardamos el valor que le pasamos
@@ -38,11 +39,11 @@ public class MainActivity extends Activity {
     }
 
     //Funcion que lee SharedPreferences para obtener el token
-    /*private String obtenerToken(){
+    private String obtenerToken(){
         SharedPreferences preferences = getSharedPreferences("tokenUsuario", Context.MODE_PRIVATE);
         String token = preferences.getString("token", "Login required");
         return token;
-    }*/
+    }
 
 
 
@@ -102,6 +103,8 @@ public class MainActivity extends Activity {
                         if(response.isSuccessful()) {
                             Intent i = new Intent(MainActivity.this, HomeActivity.class);
                             startActivity(i);
+
+
                         }
 
                         else {

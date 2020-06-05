@@ -2,6 +2,7 @@ package edu.upc.login.Fragments;
 
 import android.app.Activity;
 import android.content.Context;
+import android.media.session.MediaSession;
 import android.os.Bundle;
 import android.util.Log;
 import android.view.LayoutInflater;
@@ -18,7 +19,9 @@ import androidx.recyclerview.widget.RecyclerView;
 import java.util.List;
 
 import edu.upc.login.API;
+import edu.upc.login.MainActivity;
 import edu.upc.login.Adaptadores.AdapterRanking;
+import edu.upc.login.Entidades.Partida;
 import edu.upc.login.Entidades.Ranking;
 import edu.upc.login.R;
 import edu.upc.login.iComunicaFragments;
@@ -37,8 +40,7 @@ public class FragmentEstadisticas extends Fragment {
     private API api;
     Activity actividad;
     iComunicaFragments interfaceComunicaFragments;
-
-
+    MediaSession.Token token;
 
 
 
@@ -72,15 +74,14 @@ public class FragmentEstadisticas extends Fragment {
 
                 //Llamamos a servicios que hemos definido en la API
                 api = retrofit.create(API.class);
-                Call<List<Ranking>> call = api.getRankingPersonal();
 
-                call.enqueue(new Callback<List<Ranking>>() {
+                Call<List<Partida>> call = api.getRankingPersonal(token);
+
+                call.enqueue(new Callback<List<Partida>>() {
                     @Override
-                    public void onResponse(Call<List<Ranking>> call, Response<List<Ranking>> response) {
+                    public void onResponse(Call<List<Partida>> call, Response<List<Partida>> response) {
                         if(response.isSuccessful()) {
-                            List<Ranking> rankingRespuesta = response.body();
-                            //listaRanking.addAll(rankingRespuesta);
-                            mostrarDatos(rankingRespuesta);
+                            List<Partida> rankingRespuesta = response.body();
 
                         }
 
@@ -90,7 +91,7 @@ public class FragmentEstadisticas extends Fragment {
                     }
 
                     @Override
-                    public void onFailure(Call<List<Ranking>> call, Throwable t) {
+                    public void onFailure(Call<List<Partida>> call, Throwable t) {
                         Log.e("DSA","Error: No se pudo acceder a la API",t);
 
                     }

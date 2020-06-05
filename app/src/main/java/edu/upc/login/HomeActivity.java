@@ -1,5 +1,9 @@
 package edu.upc.login;
 
+import android.media.session.MediaSession;
+import android.os.Bundle;
+import android.view.MenuItem;
+
 import androidx.annotation.NonNull;
 import androidx.appcompat.app.ActionBarDrawerToggle;
 import androidx.appcompat.app.AppCompatActivity;
@@ -8,21 +12,17 @@ import androidx.drawerlayout.widget.DrawerLayout;
 import androidx.fragment.app.FragmentManager;
 import androidx.fragment.app.FragmentTransaction;
 
-import android.os.Bundle;
-import android.view.MenuItem;
-
-
 import com.google.android.material.navigation.NavigationView;
 
 import edu.upc.login.Entidades.Item;
-import edu.upc.login.Entidades.Ranking;
-import edu.upc.login.Fragments.FragmentItemDetalle;
+import edu.upc.login.MainActivity;
 import edu.upc.login.Fragments.FragmentCamara;
-import edu.upc.login.Fragments.FragmentInventario;
-import edu.upc.login.Fragments.FragmentPerfil;
 import edu.upc.login.Fragments.FragmentEstadisticas;
-import edu.upc.login.Fragments.FragmentItems;
 import edu.upc.login.Fragments.FragmentHome;
+import edu.upc.login.Fragments.FragmentInventario;
+import edu.upc.login.Fragments.FragmentItemDetalle;
+import edu.upc.login.Fragments.FragmentItems;
+import edu.upc.login.Fragments.FragmentPerfil;
 
 public class HomeActivity extends AppCompatActivity implements NavigationView.OnNavigationItemSelectedListener, iComunicaFragments {
 
@@ -30,6 +30,9 @@ public class HomeActivity extends AppCompatActivity implements NavigationView.On
     ActionBarDrawerToggle actionBarDrawerToggle;
     Toolbar toolbar;
     NavigationView navigationView;
+    MediaSession.Token token;
+
+
 
     //variables para cargar fragment principal
 

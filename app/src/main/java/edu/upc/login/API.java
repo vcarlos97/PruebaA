@@ -2,8 +2,11 @@ package edu.upc.login;
 
 
 
+import android.media.session.MediaSession;
+
 import java.util.List;
 
+import edu.upc.login.Entidades.Partida;
 import edu.upc.login.Entidades.Ranking;
 import retrofit2.Call;
 import retrofit2.http.Body;
@@ -16,7 +19,7 @@ public interface API {
     Call <List<Ranking>> getRanking();
 
 @GET("game/rankingPersonal")
-    Call<List<Ranking>> getRankingPersonal();
+    Call<List<Partida>> getRankingPersonal(@Body MediaSession.Token token);
 
 @POST("auth/login")
     Call<LoginCredentials> login(@Body LoginCredentials loginCredentials);
