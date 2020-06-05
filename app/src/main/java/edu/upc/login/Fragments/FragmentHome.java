@@ -11,7 +11,7 @@ import androidx.fragment.app.Fragment;
 
 import edu.upc.login.R;
 
-public class MainFragment extends Fragment {
+public class FragmentHome extends Fragment {
     @Nullable
     @Override
     public View onCreateView(@NonNull LayoutInflater inflater, @Nullable ViewGroup container, @Nullable Bundle savedInstanceState) {

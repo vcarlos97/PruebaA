@@ -19,6 +19,7 @@ public class AdapterItem extends RecyclerView.Adapter<AdapterItem.ViewHolder> im
     LayoutInflater inflater;
     ArrayList<Item> model;
 
+
     //listener
     private View.OnClickListener listener;
 

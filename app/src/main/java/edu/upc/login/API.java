@@ -24,7 +24,7 @@ public interface API {
     Call<Void> deleteTrack (@Path("id") String id);
 */
 @GET("game/ranking")
-Call <RankingRespuesta> getRanking();
+Call <List<Ranking>> getRanking();
 
 @POST("auth/login")
     Call<LoginCredentials> login(@Body LoginCredentials loginCredentials);

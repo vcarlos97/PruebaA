@@ -9,15 +9,15 @@ import android.view.ViewGroup;
 import androidx.annotation.NonNull;
 import androidx.annotation.Nullable;
 import androidx.fragment.app.Fragment;
+import androidx.recyclerview.widget.LinearLayoutManager;
 import androidx.recyclerview.widget.RecyclerView;
 
-import java.util.ArrayList;
+import java.util.List;
 
 import edu.upc.login.API;
 import edu.upc.login.Adaptadores.AdapterRanking;
 import edu.upc.login.Entidades.Ranking;
 import edu.upc.login.R;
-import edu.upc.login.RankingRespuesta;
 import okhttp3.OkHttpClient;
 import okhttp3.logging.HttpLoggingInterceptor;
 import retrofit2.Call;
@@ -27,31 +27,36 @@ import retrofit2.Retrofit;
 import retrofit2.converter.gson.GsonConverterFactory;
 
 public class FragmentEstadisticas extends Fragment {
+
     AdapterRanking adapterRanking;
     RecyclerView recyclerViewRanking;
-    ArrayList<Ranking> listaRanking;
     private API api;
-    private static String TAG ="Ranking";
+
+
+
 
 
     @Nullable
     @Override
     public View onCreateView(@NonNull LayoutInflater inflater, @Nullable ViewGroup container, @Nullable Bundle savedInstanceState) {
-        View view = inflater.inflate(R.layout.item_fragment, container, false);
+        View view = inflater.inflate(R.layout.estadisticas_fragment, container, false);
         recyclerViewRanking = view.findViewById(R.id.recyclerId);
-        listaRanking = new ArrayList<Ranking>();
+
         //cargar la lista
         cargarLista();
 
 
 
 
+
+
         return view;
+
     }
 
     public void cargarLista() {
         //Creamos interceptor
-       /* HttpLoggingInterceptor interceptor = new HttpLoggingInterceptor();
+        HttpLoggingInterceptor interceptor = new HttpLoggingInterceptor();
         interceptor.setLevel(HttpLoggingInterceptor.Level.BODY);
 
         //Creamos cliente
@@ -60,45 +65,52 @@ public class FragmentEstadisticas extends Fragment {
                 .build();
 
         //Crear retrofit
-        Retrofit retrofit = new Retrofit.Builder()
+        final Retrofit retrofit = new Retrofit.Builder()
                 .baseUrl("http://147.83.7.203:8080/dsaApp/")
                 .addConverterFactory(GsonConverterFactory.create())
                 .client(client)
-                .build();*/
+                .build();
 
         //Llamamos a servicios que hemos definido en la API
-        //api = retrofit.create(API.class);
+        api = retrofit.create(API.class);
+        Call<List<Ranking>> call = api.getRanking();
 
-        Call<RankingRespuesta> dameRanking = api.getRanking();
-        dameRanking.enqueue(new Callback<RankingRespuesta>() {
+        call.enqueue(new Callback<List<Ranking>>() {
             @Override
-            public void onResponse(Call<RankingRespuesta> call, Response<RankingRespuesta> response) {
+            public void onResponse(Call<List<Ranking>> call, Response<List<Ranking>> response) {
                 if(response.isSuccessful()) {
-                    RankingRespuesta rankingRespuesta = response.body();
-                    ArrayList<Ranking> lista = rankingRespuesta.getResults();
+                    List<Ranking> rankingRespuesta = response.body();
+                    //listaRanking.addAll(rankingRespuesta);
+                   mostrarDatos(rankingRespuesta);
 
-                    for (int i = 0; i < lista.size(); i++) {
-                        Ranking r = lista.get(i);
-                        r.getUsername();
-                        r.getPuntos();
-                        //r.getImagen();
+                }
 
-                    }
-
-
-                    }
-                else{
-                    Log.e(TAG,"onResponse: "    +   response.errorBody());
+                else {
+                    Log.e("DSA","Error :"+response.errorBody());
                 }
             }
 
             @Override
-            public void onFailure(Call<RankingRespuesta> call, Throwable t) {
+            public void onFailure(Call<List<Ranking>> call, Throwable t) {
+                Log.e("DSA","Error: No se pudo acceder a la API",t);
 
             }
         });
-        }
+
+
     }
+    public void mostrarDatos(List<Ranking> listaRanking) {
+
+        recyclerViewRanking.setLayoutManager(new LinearLayoutManager(getContext()));
+        adapterRanking = new AdapterRanking(getContext(), listaRanking);
+        recyclerViewRanking.setAdapter(adapterRanking);
+    }
+
+
+
+    }
+
+
 
 
 

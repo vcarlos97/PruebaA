@@ -16,7 +16,7 @@ import edu.upc.login.R;
 
 
 
-public class DetalleItemFragment extends Fragment {
+public class FragmentItemDetalle extends Fragment {
     TextView nombreDetalle;
     ImageView imagenDetalle;
     @Nullable
