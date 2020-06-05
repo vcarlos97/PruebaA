@@ -2,6 +2,7 @@ package edu.upc.login.Fragments;
 
 import android.app.Activity;
 import android.content.Context;
+import android.content.SharedPreferences;
 import android.media.session.MediaSession;
 import android.os.Bundle;
 import android.util.Log;
@@ -19,6 +20,8 @@ import androidx.recyclerview.widget.RecyclerView;
 import java.util.List;
 
 import edu.upc.login.API;
+import edu.upc.login.Adaptadores.AdapterPartidas;
+import edu.upc.login.Entidades.Token;
 import edu.upc.login.MainActivity;
 import edu.upc.login.Adaptadores.AdapterRanking;
 import edu.upc.login.Entidades.Partida;
@@ -36,12 +39,17 @@ import retrofit2.converter.gson.GsonConverterFactory;
 public class FragmentEstadisticas extends Fragment {
 
     AdapterRanking adapterRanking;
+    AdapterPartidas adapterPartida;
     RecyclerView recyclerViewRanking;
     private API api;
     Activity actividad;
     iComunicaFragments interfaceComunicaFragments;
-    MediaSession.Token token;
 
+    private String obtenerToken(){
+        SharedPreferences preferences = this.getActivity().getSharedPreferences("tokenUsuario", Context.MODE_PRIVATE);
+        String token = preferences.getString("token", "Login required");
+        return token;
+    }
 
 
     @Nullable
@@ -75,6 +83,7 @@ public class FragmentEstadisticas extends Fragment {
                 //Llamamos a servicios que hemos definido en la API
                 api = retrofit.create(API.class);
 
+                String token = obtenerToken();
                 Call<List<Partida>> call = api.getRankingPersonal(token);
 
                 call.enqueue(new Callback<List<Partida>>() {
@@ -82,6 +91,7 @@ public class FragmentEstadisticas extends Fragment {
                     public void onResponse(Call<List<Partida>> call, Response<List<Partida>> response) {
                         if(response.isSuccessful()) {
                             List<Partida> rankingRespuesta = response.body();
+                            mostrarInfo(rankingRespuesta);
 
                         }
 
@@ -163,6 +173,13 @@ public class FragmentEstadisticas extends Fragment {
         adapterRanking = new AdapterRanking(getContext(), listaRanking);
         recyclerViewRanking.setAdapter(adapterRanking);
     }
+    public void mostrarInfo(List<Partida> listaPartida) {
+
+        recyclerViewRanking.setLayoutManager(new LinearLayoutManager(getContext()));
+        adapterPartida = new AdapterPartidas(getContext(), listaPartida);
+        recyclerViewRanking.setAdapter(adapterPartida);
+    }
+
 
     @Override
     public void onAttach(@NonNull Context context) {

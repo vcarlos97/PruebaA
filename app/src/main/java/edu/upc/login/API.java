@@ -8,6 +8,7 @@ import java.util.List;
 
 import edu.upc.login.Entidades.Partida;
 import edu.upc.login.Entidades.Ranking;
+import edu.upc.login.Entidades.Token;
 import retrofit2.Call;
 import retrofit2.http.Body;
 import retrofit2.http.GET;
@@ -19,12 +20,12 @@ public interface API {
     Call <List<Ranking>> getRanking();
 
 @GET("game/rankingPersonal")
-    Call<List<Partida>> getRankingPersonal(@Body MediaSession.Token token);
+    Call<List<Partida>> getRankingPersonal(@Body String token);
 
 @POST("auth/login")
-    Call<LoginCredentials> login(@Body LoginCredentials loginCredentials);
+    Call<Token> login(@Body LoginCredentials loginCredentials);
 
 @POST("auth/register")
-    Call<RegisterCredentials> register(@Body RegisterCredentials registerCredentials);
+    Call<Token> register(@Body RegisterCredentials registerCredentials);
 
 }

@@ -1,7 +1,9 @@
 package edu.upc.login;
 
 
+import android.content.Context;
 import android.content.Intent;
+import android.content.SharedPreferences;
 import android.os.Bundle;
 import android.view.View;
 import android.widget.Button;
@@ -10,6 +12,7 @@ import android.widget.Toast;
 
 import androidx.appcompat.app.AppCompatActivity;
 
+import edu.upc.login.Entidades.Token;
 import okhttp3.OkHttpClient;
 import okhttp3.logging.HttpLoggingInterceptor;
 import retrofit2.Call;
@@ -20,6 +23,20 @@ import retrofit2.converter.gson.GsonConverterFactory;
 
 public class RegisterActivity extends AppCompatActivity {
     private API api;
+
+    private void guardarToken(String token){
+        //Creamos objeto preferences que se guardara en un XML llamado tokenUsuario y es privado porque
+        //solo podremos acceder mediante nuestra app. Creamos un editor y guardamos el valor que le pasamos
+        //como parametro con la llave "token"
+
+        //Para ver sharedPreferences: device file explorer->data->data->edu.upc.login->shared_prefs
+
+        SharedPreferences preferences = getSharedPreferences("tokenUsuario", Context.MODE_PRIVATE);
+        SharedPreferences.Editor editor = preferences.edit();
+        editor.putString("token", token);
+        editor.commit();
+        //Toast.makeText(getApplicationContext(), token, Toast.LENGTH_SHORT).show();
+    }
 
 
 
@@ -61,13 +78,16 @@ public class RegisterActivity extends AppCompatActivity {
                    registerC.setPassword((String) password.getText().toString());
                    registerC.setConfirm((String) confPassword.getText().toString());
 
-                   Call<RegisterCredentials> call = api.register(registerC);
-                    call.enqueue(new Callback<RegisterCredentials>() {
+                   Call<Token> call = api.register(registerC);
+                    call.enqueue(new Callback<Token>() {
                         @Override
-                        public void onResponse(Call<RegisterCredentials> call, Response<RegisterCredentials> response) {
+                        public void onResponse(Call<Token> call, Response<Token> response) {
                             if(response.isSuccessful()) {
+                                Token token = response.body();
+                                guardarToken(token.getToken());
                                 Intent i = new Intent(RegisterActivity.this, HomeActivity.class);
                                 startActivity(i);
+                                finish();
                             }
 
                             else {
@@ -76,7 +96,7 @@ public class RegisterActivity extends AppCompatActivity {
                         }
 
                         @Override
-                        public void onFailure(Call<RegisterCredentials> call, Throwable t) {
+                        public void onFailure(Call<Token> call, Throwable t) {
                             Toast toast = Toast.makeText(getApplicationContext(), "Error al acceder a la API", Toast.LENGTH_SHORT);
                             toast.show();
                         }

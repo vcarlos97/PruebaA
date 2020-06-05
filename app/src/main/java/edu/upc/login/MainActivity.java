@@ -11,6 +11,7 @@ import android.widget.Button;
 import android.widget.TextView;
 import android.widget.Toast;
 
+import edu.upc.login.Entidades.Token;
 import okhttp3.OkHttpClient;
 import okhttp3.logging.HttpLoggingInterceptor;
 import retrofit2.Call;
@@ -35,15 +36,15 @@ public class MainActivity extends Activity {
         SharedPreferences.Editor editor = preferences.edit();
         editor.putString("token", token);
         editor.commit();
-        //Toast.makeText(getApplicationContext(), token, Toast.LENGTH_SHORT).show();
+        Toast.makeText(getApplicationContext(), token, Toast.LENGTH_SHORT).show();
     }
 
     //Funcion que lee SharedPreferences para obtener el token
-    private String obtenerToken(){
+    /*private String obtenerToken(){
         SharedPreferences preferences = getSharedPreferences("tokenUsuario", Context.MODE_PRIVATE);
         String token = preferences.getString("token", "Login required");
         return token;
-    }
+    }*/
 
 
 
@@ -95,17 +96,19 @@ public class MainActivity extends Activity {
                 loginc.setNombre((String) nombre.getText().toString());
                 loginc.setPassword((String) password.getText().toString());
 
-                Call<LoginCredentials> call = api.login(loginc);
+                Call<Token> call = api.login(loginc);
 
-                call.enqueue(new Callback<LoginCredentials>() {
+                call.enqueue(new Callback<Token>() {
                     @Override
-                    public void onResponse(Call<LoginCredentials> call, Response<LoginCredentials> response) {
+                    public void onResponse(Call<Token> call, Response<Token> response) {
                         if(response.isSuccessful()) {
+                            Token token = response.body();
+                            guardarToken(token.getToken());
                             Intent i = new Intent(MainActivity.this, HomeActivity.class);
                             startActivity(i);
-
-
+                            finish();
                         }
+
 
                         else {
                             Toast.makeText(getApplicationContext(), "Error " + response.code() + ": " +response.message(), Toast.LENGTH_SHORT).show();
@@ -113,7 +116,7 @@ public class MainActivity extends Activity {
                     }
 
                     @Override
-                    public void onFailure(Call<LoginCredentials> call, Throwable t) {
+                    public void onFailure(Call<Token> call, Throwable t) {
                         Toast toast = Toast.makeText(getApplicationContext(), "Error al acceder a la API", Toast.LENGTH_SHORT);
                         toast.show();
                 }
