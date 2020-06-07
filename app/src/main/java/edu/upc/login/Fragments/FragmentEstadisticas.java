@@ -3,7 +3,6 @@ package edu.upc.login.Fragments;
 import android.app.Activity;
 import android.content.Context;
 import android.content.SharedPreferences;
-import android.media.session.MediaSession;
 import android.os.Bundle;
 import android.util.Log;
 import android.view.LayoutInflater;
@@ -21,8 +20,6 @@ import java.util.List;
 
 import edu.upc.login.API;
 import edu.upc.login.Adaptadores.AdapterPartidas;
-import edu.upc.login.Entidades.Token;
-import edu.upc.login.MainActivity;
 import edu.upc.login.Adaptadores.AdapterRanking;
 import edu.upc.login.Entidades.Partida;
 import edu.upc.login.Entidades.Ranking;

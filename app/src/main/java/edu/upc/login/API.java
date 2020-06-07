@@ -19,7 +19,7 @@ public interface API {
 @GET("game/ranking")
     Call <List<Ranking>> getRanking();
 
-@GET("game/rankingPersonal")
+@GET("game/puntosPlayer ")
     Call<List<Partida>> getRankingPersonal(@Body String token);
 
 @POST("auth/login")
