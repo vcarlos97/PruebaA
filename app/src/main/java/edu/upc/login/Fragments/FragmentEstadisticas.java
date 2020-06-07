@@ -12,6 +12,7 @@ import androidx.fragment.app.Fragment;
 import androidx.recyclerview.widget.RecyclerView;
 
 import java.util.ArrayList;
+import java.util.List;
 
 import edu.upc.login.API;
 import edu.upc.login.Adaptadores.AdapterRanking;
@@ -69,21 +70,15 @@ public class FragmentEstadisticas extends Fragment {
         //Llamamos a servicios que hemos definido en la API
         //api = retrofit.create(API.class);
 
-        Call<RankingRespuesta> dameRanking = api.getRanking();
-        dameRanking.enqueue(new Callback<RankingRespuesta>() {
+        Call<List<Ranking>> dameRanking = api.getRanking();
+        dameRanking.enqueue(new Callback<List<Ranking>>() {
             @Override
-            public void onResponse(Call<RankingRespuesta> call, Response<RankingRespuesta> response) {
+            public void onResponse(Call<List<Ranking>> call, Response<List<Ranking>> response) {
                 if(response.isSuccessful()) {
-                    RankingRespuesta rankingRespuesta = response.body();
-                    ArrayList<Ranking> lista = rankingRespuesta.getResults();
+                    List<Ranking> rankingRespuesta = response.body();
+                    //ArrayList<Ranking> lista = rankingRespuesta.getResults();
 
-                    for (int i = 0; i < lista.size(); i++) {
-                        Ranking r = lista.get(i);
-                        r.getUsername();
-                        r.getPuntos();
-                        //r.getImagen();
 
-                    }
 
 
                     }
@@ -93,7 +88,7 @@ public class FragmentEstadisticas extends Fragment {
             }
 
             @Override
-            public void onFailure(Call<RankingRespuesta> call, Throwable t) {
+            public void onFailure(Call<List<Ranking>> call, Throwable t) {
 
             }
         });
