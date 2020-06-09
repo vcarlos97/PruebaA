@@ -44,5 +44,5 @@ Call <List<Ranking>> getRanking();
     Call<List<Foro>> getComments();
 
 @POST("user/newcomment")
-    Call<Void> addComment(@Body Comentario comentario);
+    Call<Void> addComment(@Query("token") String token, @Body Comentario comentario);
 }

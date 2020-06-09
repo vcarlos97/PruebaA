@@ -1,17 +1,15 @@
 package edu.upc.login.Entidades;
 
-import java.sql.Date;
-
 public class Foro {
 
     public int idComment;
     public String nombre;
     public String comentario;
-    public Date fecha;
+    public String fecha;
 
     public Foro(){}
 
-    public Foro(int idComment, String nombre, String comentario, Date fecha) {
+    public Foro(int idComment, String nombre, String comentario, String fecha) {
         this();
         this.idComment = idComment;
         this.nombre = nombre;
@@ -43,11 +41,11 @@ public class Foro {
         this.comentario = comentario;
     }
 
-    public Date getFecha() {
+    public String getFecha() {
         return fecha;
     }
 
-    public void setFecha(Date fecha) {
+    public void setFecha(String fecha) {
         this.fecha = fecha;
     }
 
