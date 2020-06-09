@@ -4,6 +4,7 @@ import android.app.Activity;
 import android.content.Context;
 import android.content.Intent;
 import android.content.SharedPreferences;
+import android.media.session.MediaSession;
 import android.os.Bundle;
 import android.view.View;
 import android.widget.Button;
@@ -20,7 +21,6 @@ import retrofit2.Retrofit;
 import retrofit2.converter.gson.GsonConverterFactory;
 
 
-//preguntar como arreglar tema de diseño en el layout,
 public class MainActivity extends Activity {
 
     private API api;
@@ -36,17 +36,17 @@ public class MainActivity extends Activity {
         SharedPreferences.Editor editor = preferences.edit();
         editor.putString("token", token);
         editor.commit();
-        obtenerToken();
-        //Toast.makeText(getApplicationContext(), token, Toast.LENGTH_SHORT).show();
+        Toast.makeText(getApplicationContext(), token, Toast.LENGTH_SHORT).show();
     }
 
     //Funcion que lee SharedPreferences para obtener el token
-    private String obtenerToken(){
+    /*private String obtenerToken(){
         SharedPreferences preferences = getSharedPreferences("tokenUsuario", Context.MODE_PRIVATE);
         String token = preferences.getString("token", "Login required");
-        Toast toast = Toast.makeText(getApplicationContext(), token, Toast.LENGTH_SHORT);
         return token;
-    }
+    }*/
+
+
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {
@@ -108,6 +108,7 @@ public class MainActivity extends Activity {
                             startActivity(i);
                             finish();
                         }
+
 
                         else {
                             Toast.makeText(getApplicationContext(), "Error " + response.code() + ": " +response.message(), Toast.LENGTH_SHORT).show();

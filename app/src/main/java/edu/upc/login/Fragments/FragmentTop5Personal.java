@@ -11,11 +11,11 @@ import androidx.fragment.app.Fragment;
 
 import edu.upc.login.R;
 
-public class MainFragment extends Fragment {
+public class FragmentTop5Personal extends Fragment {
     @Nullable
     @Override
     public View onCreateView(@NonNull LayoutInflater inflater, @Nullable ViewGroup container, @Nullable Bundle savedInstanceState) {
-        View view  = inflater.inflate(R.layout.main_fragment,container,false);
+        View view  = inflater.inflate(R.layout.perfil_fragment,container,false);
         return view;
     }
 }

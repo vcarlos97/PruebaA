@@ -38,6 +38,8 @@ public class RegisterActivity extends AppCompatActivity {
         //Toast.makeText(getApplicationContext(), token, Toast.LENGTH_SHORT).show();
     }
 
+
+
     @Override
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
@@ -81,10 +83,11 @@ public class RegisterActivity extends AppCompatActivity {
                         @Override
                         public void onResponse(Call<Token> call, Response<Token> response) {
                             if(response.isSuccessful()) {
-                                String token = response.body().getToken();
-                                guardarToken(token);
+                                Token token = response.body();
+                                guardarToken(token.getToken());
                                 Intent i = new Intent(RegisterActivity.this, HomeActivity.class);
                                 startActivity(i);
+                                finish();
                             }
 
                             else {

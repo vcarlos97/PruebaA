@@ -17,7 +17,6 @@ import com.google.android.material.navigation.NavigationView;
 import edu.upc.login.Entidades.Item;
 import edu.upc.login.Fragments.DetalleItemFragment;
 import edu.upc.login.Fragments.FragmentCamara;
-import edu.upc.login.Fragments.FragmentForo;
 import edu.upc.login.Fragments.FragmentInventario;
 import edu.upc.login.Fragments.FragmentPerfil;
 import edu.upc.login.Fragments.FragmentEstadisticas;
@@ -60,7 +59,7 @@ public class HomeActivity extends AppCompatActivity implements NavigationView.On
         //cargar fragment principal
         fragmentManager = getSupportFragmentManager();
         fragmentTransaction = fragmentManager.beginTransaction();
-        fragmentTransaction.add(R.id.container, new MainFragment());
+        fragmentTransaction.add(R.id.container, new FragmentHome());
         fragmentTransaction.commit();
     }
 
@@ -69,7 +68,7 @@ public class HomeActivity extends AppCompatActivity implements NavigationView.On
         if(menuItem.getItemId() == R.id.home){
             fragmentManager = getSupportFragmentManager();
             fragmentTransaction = fragmentManager.beginTransaction();
-            fragmentTransaction.replace(R.id.container, new MainFragment());
+            fragmentTransaction.replace(R.id.container, new FragmentHome());
             fragmentTransaction.commit();
 
         }
