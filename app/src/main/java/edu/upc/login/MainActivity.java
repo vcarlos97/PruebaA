@@ -36,7 +36,6 @@ public class MainActivity extends Activity {
         SharedPreferences.Editor editor = preferences.edit();
         editor.putString("token", token);
         editor.commit();
-        Toast.makeText(getApplicationContext(), token, Toast.LENGTH_SHORT).show();
     }
 
     //Funcion que lee SharedPreferences para obtener el token
