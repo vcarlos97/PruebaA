@@ -65,6 +65,7 @@ public class FragmentForo extends Fragment {
             @Override
             public void onClick(View v) {
                 enviarComentario();
+                comentario.setText("");
             }
         });
         return view;
