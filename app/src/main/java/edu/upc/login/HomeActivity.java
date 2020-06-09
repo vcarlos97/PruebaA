@@ -15,13 +15,14 @@ import android.view.MenuItem;
 import com.google.android.material.navigation.NavigationView;
 
 import edu.upc.login.Entidades.Item;
-import edu.upc.login.Fragments.DetalleItemFragment;
+import edu.upc.login.Fragments.FragmentForo;
+import edu.upc.login.Fragments.FragmentItemDetalle;
 import edu.upc.login.Fragments.FragmentCamara;
 import edu.upc.login.Fragments.FragmentInventario;
 import edu.upc.login.Fragments.FragmentPerfil;
 import edu.upc.login.Fragments.FragmentEstadisticas;
 import edu.upc.login.Fragments.FragmentItems;
-import edu.upc.login.Fragments.MainFragment;
+import edu.upc.login.Fragments.FragmentHome;
 
 public class HomeActivity extends AppCompatActivity implements NavigationView.OnNavigationItemSelectedListener, iComunicaFragments {
 
@@ -36,7 +37,7 @@ public class HomeActivity extends AppCompatActivity implements NavigationView.On
     FragmentTransaction fragmentTransaction;
 
     //variables del fragmentdetalle item
-    DetalleItemFragment detalleItemFragment;
+    FragmentItemDetalle detalleItemFragment;
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {
@@ -123,7 +124,7 @@ public class HomeActivity extends AppCompatActivity implements NavigationView.On
     @Override
     public void enviarObjeto(Item item) {
         // Aquí se realiza toda la logica necesaria para poder realizar el envío
-        detalleItemFragment = new DetalleItemFragment();
+        detalleItemFragment = new FragmentItemDetalle();
         //objeto de tipo bundle para transportar la información
         Bundle bundleEnvio = new Bundle();
         //enviar el objeto que está llegando con Serializable

@@ -10,7 +10,7 @@
     <androidx.recyclerview.widget.RecyclerView
         android:id="@+id/recyclerForoId"
         android:layout_width="match_parent"
-        android:layout_height="348dp"
+        android:layout_height="420dp"
         android:layout_marginBottom="16dp"
         android:scrollbars="vertical"
         app:layout_constraintBottom_toTopOf="@+id/newComentario"
@@ -24,27 +24,29 @@
 
     <EditText
         android:id="@+id/newComentario"
-        android:layout_width="302dp"
-        android:layout_height="46dp"
-        android:layout_marginBottom="8dp"
+        android:layout_width="267dp"
+        android:layout_height="42dp"
+        android:layout_marginBottom="28dp"
         android:autofillHints=""
         android:ems="10"
         android:hint="Añade un comentario"
         android:inputType="textPersonName"
-        app:layout_constraintBottom_toTopOf="@+id/sendCommentBtn"
-        app:layout_constraintEnd_toEndOf="parent"
-        app:layout_constraintHorizontal_bias="0.577"
+        app:layout_constraintBottom_toBottomOf="parent"
+        app:layout_constraintEnd_toStartOf="@+id/sendCommentBtn"
+        app:layout_constraintHorizontal_bias="1.0"
         app:layout_constraintStart_toStartOf="parent" />
 
     <Button
         android:id="@+id/sendCommentBtn"
-        android:layout_width="wrap_content"
-        android:layout_height="wrap_content"
-        android:layout_marginBottom="52dp"
+        android:layout_width="71dp"
+        android:layout_height="40dp"
+        android:layout_marginEnd="16dp"
+        android:layout_marginBottom="20dp"
         android:background="@drawable/button_rounded"
         android:text="Enviar"
         app:layout_constraintBottom_toBottomOf="parent"
         app:layout_constraintEnd_toEndOf="parent"
-        app:layout_constraintHorizontal_bias="0.498"
-        app:layout_constraintStart_toStartOf="parent" />
+        app:layout_constraintTop_toBottomOf="@+id/recyclerForoId"
+        app:layout_constraintVertical_bias="0.615" />
+
 </androidx.constraintlayout.widget.ConstraintLayout>

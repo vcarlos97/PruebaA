@@ -8,5 +8,4 @@ import edu.upc.login.Entidades.Ranking;
 public interface iComunicaFragments {
 
     public void enviarObjeto(Item item);
-    public void consultarTop ();
 }
