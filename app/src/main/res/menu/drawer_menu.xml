@@ -27,6 +27,10 @@
                 android:icon="@drawable/ic_perfil"
                 android:title="Perfil"></item>
             <item
+                android:id="@+id/foro"
+                android:icon="@drawable/ic_estadisticas"
+                android:title="Foro"></item>
+            <item
                 android:id="@+id/camara"
                 android:icon="@drawable/ic_camera"
                 android:title="Camara"></item>

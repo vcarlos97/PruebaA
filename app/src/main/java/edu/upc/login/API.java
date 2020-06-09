@@ -23,6 +23,9 @@ public interface API {
 @GET("game/toppartidas ")
     Call<List<Partida>> getRankingPersonal(@Query("token") String token);
 
+//Servicio que pasa un JSON con las credenciales del login y devuelve un token
+//que se guardara en sharedPreferences
+//Para ver sharedPreferences: device file explorer->data->data->edu.upc.login->shared_prefs
 @POST("auth/login")
     Call<Token> login(@Body LoginCredentials loginCredentials);
 
