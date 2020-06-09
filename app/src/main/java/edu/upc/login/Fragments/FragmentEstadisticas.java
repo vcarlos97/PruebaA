@@ -32,7 +32,6 @@ import retrofit2.Callback;
 import retrofit2.Response;
 import retrofit2.Retrofit;
 import retrofit2.converter.gson.GsonConverterFactory;
-import retrofit2.http.Query;
 
 public class FragmentEstadisticas extends Fragment {
 
@@ -59,11 +58,14 @@ public class FragmentEstadisticas extends Fragment {
         //cargar la lista
         cargarLista();
         Button top5button = view.findViewById(R.id.top5personal);
+        Button generalButton = view.findViewById(R.id.top5general);
         top5button.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View view) {
 
                 //Creamos interceptor
+                top5button.setVisibility(view.INVISIBLE);
+                generalButton.setVisibility(view.VISIBLE);
 
                 HttpLoggingInterceptor interceptor = new HttpLoggingInterceptor();
                 interceptor.setLevel(HttpLoggingInterceptor.Level.BODY);
@@ -106,6 +108,15 @@ public class FragmentEstadisticas extends Fragment {
 
                     }
                 });
+                generalButton.setOnClickListener(new View.OnClickListener() {
+                    @Override
+                    public void onClick(View v) {
+                        top5button.setVisibility(view.VISIBLE);
+                        generalButton.setVisibility(view.INVISIBLE);
+                        cargarLista();
+                    }
+                });
+
 
 
 
