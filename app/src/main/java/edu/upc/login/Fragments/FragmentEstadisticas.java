@@ -32,6 +32,7 @@ import retrofit2.Callback;
 import retrofit2.Response;
 import retrofit2.Retrofit;
 import retrofit2.converter.gson.GsonConverterFactory;
+import retrofit2.http.Query;
 
 public class FragmentEstadisticas extends Fragment {
 
@@ -61,7 +62,9 @@ public class FragmentEstadisticas extends Fragment {
         top5button.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View view) {
+
                 //Creamos interceptor
+
                 HttpLoggingInterceptor interceptor = new HttpLoggingInterceptor();
                 interceptor.setLevel(HttpLoggingInterceptor.Level.BODY);
 

@@ -13,14 +13,15 @@ import retrofit2.Call;
 import retrofit2.http.Body;
 import retrofit2.http.GET;
 import retrofit2.http.POST;
+import retrofit2.http.Query;
 
 public interface API {
 
 @GET("game/ranking")
     Call <List<Ranking>> getRanking();
 
-@GET("game/puntosPlayer ")
-    Call<List<Partida>> getRankingPersonal(@Body String token);
+@GET("game/toppartidas ")
+    Call<List<Partida>> getRankingPersonal(@Query("token") String token);
 
 @POST("auth/login")
     Call<Token> login(@Body LoginCredentials loginCredentials);

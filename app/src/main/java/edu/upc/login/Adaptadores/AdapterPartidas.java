@@ -1,7 +1,6 @@
 package edu.upc.login.Adaptadores;
 
 import android.content.Context;
-import android.util.Log;
 import android.view.LayoutInflater;
 import android.view.View;
 import android.view.ViewGroup;
@@ -13,11 +12,9 @@ import androidx.recyclerview.widget.RecyclerView;
 
 import com.squareup.picasso.Picasso;
 
-import java.util.ArrayList;
 import java.util.List;
 
 import edu.upc.login.Entidades.Partida;
-import edu.upc.login.Entidades.Ranking;
 import edu.upc.login.R;
 
 public class AdapterPartidas extends RecyclerView.Adapter<AdapterPartidas.ViewHolder> implements View.OnClickListener {
