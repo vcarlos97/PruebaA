@@ -1,14 +1,14 @@
 <?xml version="1.0" encoding="utf-8"?>
 <RelativeLayout xmlns:android="http://schemas.android.com/apk/res/android"
     android:layout_width="fill_parent"
-    android:layout_height="100dp"
+    android:layout_height="80dp"
     android:padding="6dip"
     >
 
     <ImageView
         android:id="@+id/foto"
-        android:layout_width="100dp"
-        android:layout_height="100dp"
+        android:layout_width="75dp"
+        android:layout_height="75dp"
         android:layout_alignParentBottom="true"
         android:layout_alignParentTop="true"
         android:layout_marginRight="6dip"
@@ -16,7 +16,7 @@
         android:src="@mipmap/ic_launcher" />
 
     <TextView
-        android:id="@+id/puntos"
+        android:id="@+id/username"
         android:layout_width="fill_parent"
         android:layout_height="26dip"
         android:layout_alignParentBottom="true"
@@ -33,14 +33,14 @@
         android:layout_alignParentBottom="true"
         android:layout_alignParentRight="true"
         android:layout_toRightOf="@id/foto"
-        android:layout_below="@+id/username"
+        android:layout_below="@+id/puntos"
         android:ellipsize="marquee"
         android:singleLine="true"
         android:text="duracion"
         android:textSize="16sp" />
 
     <TextView
-        android:id="@+id/username"
+        android:id="@+id/puntos"
         android:layout_width="fill_parent"
         android:layout_height="wrap_content"
         android:layout_alignWithParentIfMissing="true"

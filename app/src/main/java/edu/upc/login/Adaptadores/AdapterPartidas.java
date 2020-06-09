@@ -48,9 +48,9 @@ public class AdapterPartidas extends RecyclerView.Adapter<AdapterPartidas.ViewHo
         int puntos=model.get(position).getPuntos();
         String duracion=model.get(position).getDuracion();
         int nivelMax=model.get(position).getNivelMax();
-        holder.duracion.setText(duracion);
-        holder.puntos.setText(""+puntos);
-        holder.nivelMax.setText(""+nivelMax);
+        holder.duracion.setText("Duración: "+duracion+ " minutos");
+        holder.puntos.setText("Puntos: "+puntos);
+        holder.nivelMax.setText("Nivel Máximo: "+nivelMax);
         if(position==0) {
             Picasso.get().load(R.drawable.uno).into(holder.imagen);
         }
