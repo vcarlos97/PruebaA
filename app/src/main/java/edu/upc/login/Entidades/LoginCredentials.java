@@ -1,4 +1,4 @@
-package edu.upc.login;
+package edu.upc.login.Entidades;
 
 public class LoginCredentials {
 

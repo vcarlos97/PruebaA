@@ -12,18 +12,17 @@ import androidx.recyclerview.widget.RecyclerView;
 
 import java.util.ArrayList;
 
-import edu.upc.login.Entidades.Item;
+import edu.upc.login.Entidades.Inventario;
 import edu.upc.login.R;
 
-public class AdapterItem extends RecyclerView.Adapter<AdapterItem.ViewHolder> implements View.OnClickListener {
-
+public class AdapterInventario extends RecyclerView.Adapter<AdapterInventario.ViewHolder> implements View.OnClickListener {
     LayoutInflater inflater;
-    ArrayList<Item> model;
+    ArrayList<Inventario> model;
 
     //listener
     private View.OnClickListener listener;
 
-    public AdapterItem(Context context, ArrayList<Item> model){
+    public AdapterInventario(Context context, ArrayList<Inventario> model){
         this.inflater= LayoutInflater.from(context);
         this.model=model;
 
@@ -31,10 +30,10 @@ public class AdapterItem extends RecyclerView.Adapter<AdapterItem.ViewHolder> im
 
     @NonNull
     @Override
-    public ViewHolder onCreateViewHolder(@NonNull ViewGroup parent, int viewType) {
+    public AdapterInventario.ViewHolder onCreateViewHolder(@NonNull ViewGroup parent, int viewType) {
         View view = inflater.inflate(R.layout.lista_items,parent,false);
         view.setOnClickListener(this);
-        return new ViewHolder(view);
+        return new AdapterInventario.ViewHolder(view);
     }
 
     public void setOnClickListener (View.OnClickListener listener){
@@ -42,16 +41,14 @@ public class AdapterItem extends RecyclerView.Adapter<AdapterItem.ViewHolder> im
     }
 
     @Override
-    public void onBindViewHolder(@NonNull ViewHolder holder, int position) {
+    public void onBindViewHolder(@NonNull AdapterInventario.ViewHolder holder, int position) {
 
-        String nombre=model.get(position).getNombre();
-        String descripcion=model.get(position).getDescripcion();
-        int precio = model.get(position).getPrecio();
-        int imagen = model.get(position).getImagenid();
-        holder.nombres.setText(nombre);
-        holder.descripciones.setText(descripcion);
-        holder.precios.setText("Precio: " + precio);
-        holder.imagen.setImageResource(imagen);
+        int idObjeto = model.get(position).getIdObjeto();
+        int cantidad = model.get(position).getCantidad();
+        //int imagen = model.get(position).getImagenid();
+        holder.nombre.setText("" + idObjeto);
+        holder.cantidad.setText("" + cantidad);
+        //holder.imagen.setImageResource(imagen);
     }
 
     @Override
@@ -68,15 +65,14 @@ public class AdapterItem extends RecyclerView.Adapter<AdapterItem.ViewHolder> im
 
     public class ViewHolder extends RecyclerView.ViewHolder{
 
-        TextView nombres, descripciones, precios;
+        TextView nombre, cantidad;
         ImageView imagen;
 
         public ViewHolder(@NonNull View itemView) {
             super(itemView);
-            nombres=itemView.findViewById(R.id.nombre_item);
-            descripciones=itemView.findViewById(R.id.descripcion);
-            precios=itemView.findViewById(R.id.precio);
-            imagen=itemView.findViewById(R.id.imagen_item);
+            nombre=itemView.findViewById(R.id.nombre_item);
+            cantidad=itemView.findViewById(R.id.cantidad_item);
+            //imagen=itemView.findViewById(R.id.imagen_item);
         }
     }
 }

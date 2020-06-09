@@ -12,6 +12,7 @@ import android.widget.Toast;
 
 import androidx.appcompat.app.AppCompatActivity;
 
+import edu.upc.login.Entidades.RegisterCredentials;
 import edu.upc.login.Entidades.Token;
 import okhttp3.OkHttpClient;
 import okhttp3.logging.HttpLoggingInterceptor;

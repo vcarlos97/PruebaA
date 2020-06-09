@@ -2,15 +2,15 @@ package edu.upc.login;
 
 
 
-import java.util.ArrayList;
-import android.media.session.MediaSession;
-
 import java.util.List;
 
 import edu.upc.login.Entidades.Comentario;
 import edu.upc.login.Entidades.Foro;
+import edu.upc.login.Entidades.Inventario;
+import edu.upc.login.Entidades.LoginCredentials;
 import edu.upc.login.Entidades.Partida;
 import edu.upc.login.Entidades.Ranking;
+import edu.upc.login.Entidades.RegisterCredentials;
 import edu.upc.login.Entidades.Token;
 import retrofit2.Call;
 import retrofit2.http.Body;
@@ -34,6 +34,12 @@ public interface API {
 
 @POST("auth/register")
     Call<Token> register(@Body RegisterCredentials registerCredentials);
+
+@POST("game/compra")
+Call<Void> comprar (@Body Inventario inventario);
+
+@GET("game/objetos")
+Call<Inventario> inventario (@Query("token") String token);
 
 @GET("user/comments")
     Call<List<Foro>> getComments();
