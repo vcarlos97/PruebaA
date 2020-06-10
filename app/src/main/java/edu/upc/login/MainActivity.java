@@ -7,8 +7,12 @@ import android.content.SharedPreferences;
 import android.os.Bundle;
 import android.view.View;
 import android.widget.Button;
+import android.widget.ProgressBar;
+import android.widget.RelativeLayout;
 import android.widget.TextView;
 import android.widget.Toast;
+
+import androidx.constraintlayout.widget.ConstraintLayout;
 
 import edu.upc.login.Entidades.LoginCredentials;
 import edu.upc.login.Entidades.Token;
@@ -92,6 +96,18 @@ public class MainActivity extends Activity {
         loginButton.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View v) {
+                /********PROGRESS BAR******/
+                ConstraintLayout cl = (ConstraintLayout) findViewById(R.id.login_container);
+                ProgressBar progressBar = new ProgressBar(getApplicationContext(), null, android.R.attr.progressBarStyleHorizontal);
+                // Crea layout parameters para el ProgressBar
+                RelativeLayout.LayoutParams lp = new RelativeLayout.LayoutParams( RelativeLayout.LayoutParams.MATCH_PARENT, RelativeLayout.LayoutParams.WRAP_CONTENT);
+                progressBar.setLayoutParams(lp);
+                //Define como indeterminado.
+                progressBar.setIndeterminate(true);
+                // Agrega el ProgressBar al Layout
+                cl.addView(progressBar);
+                /***************************/
+
                 LoginCredentials loginc = new LoginCredentials();
                 loginc.setNombre((String) nombre.getText().toString());
                 loginc.setPassword((String) password.getText().toString());

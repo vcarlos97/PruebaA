@@ -7,10 +7,13 @@ import android.content.SharedPreferences;
 import android.os.Bundle;
 import android.view.View;
 import android.widget.Button;
+import android.widget.ProgressBar;
+import android.widget.RelativeLayout;
 import android.widget.TextView;
 import android.widget.Toast;
 
 import androidx.appcompat.app.AppCompatActivity;
+import androidx.constraintlayout.widget.ConstraintLayout;
 
 import edu.upc.login.Entidades.RegisterCredentials;
 import edu.upc.login.Entidades.Token;
@@ -73,7 +76,19 @@ public class RegisterActivity extends AppCompatActivity {
             registrarseButton.setOnClickListener(new View.OnClickListener() {
                 @Override
                 public void onClick(View v) {
-                   RegisterCredentials registerC = new RegisterCredentials();
+                    /********PROGRESS BAR******/
+                    ConstraintLayout cl = (ConstraintLayout) findViewById(R.id.register_container);
+                    ProgressBar progressBar = new ProgressBar(getApplicationContext(), null, android.R.attr.progressBarStyleHorizontal);
+                    // Crea layout parameters para el ProgressBar
+                    RelativeLayout.LayoutParams lp = new RelativeLayout.LayoutParams( RelativeLayout.LayoutParams.MATCH_PARENT, RelativeLayout.LayoutParams.WRAP_CONTENT);
+                    progressBar.setLayoutParams(lp);
+                    //Define como indeterminado.
+                    progressBar.setIndeterminate(true);
+                    // Agrega el ProgressBar al Layout
+                    cl.addView(progressBar);
+                    /***************************/
+
+                    RegisterCredentials registerC = new RegisterCredentials();
                    registerC.setNombre((String) nombre.getText().toString());
                    registerC.setMail((String) mail.getText().toString());
                    registerC.setPassword((String) password.getText().toString());
