@@ -62,8 +62,6 @@ public class FragmentItems extends Fragment {
         adapterItem.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View view) {
-                String nombre = listaItems.get(recyclerViewItems.getChildAdapterPosition(view)).getNombre();
-                Toast.makeText(getContext(),"Seleccionó: "+nombre,Toast.LENGTH_SHORT).show();
                 interfaceComunicaFragments.enviarObjeto(listaItems.get(recyclerViewItems.getChildAdapterPosition(view)));
             }
         });

@@ -27,17 +27,17 @@
 
     <TextView
         android:id="@+id/precio"
-        android:layout_width="match_parent"
-        android:layout_height="wrap_content"
+        android:layout_width="247dp"
+        android:layout_height="29dp"
         android:text="Precio:"
-        android:textSize="30sp"
+        android:textSize="20sp"
         android:textStyle="bold"
         app:layout_constraintBottom_toBottomOf="parent"
         app:layout_constraintEnd_toEndOf="parent"
-        app:layout_constraintHorizontal_bias="0.0"
+        app:layout_constraintHorizontal_bias="0.792"
         app:layout_constraintStart_toStartOf="parent"
         app:layout_constraintTop_toBottomOf="@+id/imagen_detalle"
-        app:layout_constraintVertical_bias="0.408">
+        app:layout_constraintVertical_bias="0.423">
 
     </TextView>
 
@@ -140,14 +140,29 @@
 
     <TextView
         android:id="@+id/textprecio"
-        android:layout_width="158dp"
-        android:layout_height="40dp"
+        android:layout_width="160dp"
+        android:layout_height="28dp"
         android:gravity="center"
-        android:text="TextView"
+        android:text="200"
+        android:textSize="20sp"
         app:layout_constraintBottom_toBottomOf="@+id/precio"
         app:layout_constraintEnd_toEndOf="@+id/precio"
+        app:layout_constraintHorizontal_bias="0.19"
         app:layout_constraintStart_toStartOf="@+id/precio"
-        app:layout_constraintTop_toTopOf="@+id/precio" />
+        app:layout_constraintTop_toTopOf="@+id/precio"
+        app:layout_constraintVertical_bias="1.0" />
+
+    <ImageView
+        android:id="@+id/imageView4"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        app:layout_constraintBottom_toBottomOf="@+id/textprecio"
+        app:layout_constraintEnd_toEndOf="@+id/textprecio"
+        app:layout_constraintHorizontal_bias="0.805"
+        app:layout_constraintStart_toStartOf="@+id/textprecio"
+        app:layout_constraintTop_toTopOf="@+id/textprecio"
+        app:layout_constraintVertical_bias="0.25"
+        app:srcCompat="@drawable/ic_moneda_naranja" />
 
 
 </androidx.constraintlayout.widget.ConstraintLayout>
