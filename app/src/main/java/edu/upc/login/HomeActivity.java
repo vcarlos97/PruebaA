@@ -72,6 +72,7 @@ public class HomeActivity extends AppCompatActivity implements NavigationView.On
             fragmentTransaction = fragmentManager.beginTransaction();
             fragmentTransaction.replace(R.id.container, new FragmentHome());
             fragmentTransaction.commit();
+            drawerLayout.closeDrawers();
 
         }
         if(menuItem.getItemId() == R.id.inventario){
@@ -79,7 +80,7 @@ public class HomeActivity extends AppCompatActivity implements NavigationView.On
             fragmentTransaction = fragmentManager.beginTransaction();
             fragmentTransaction.replace(R.id.container, new FragmentInventario());
             fragmentTransaction.commit();
-
+            drawerLayout.closeDrawers();
         }
 
         if(menuItem.getItemId() == R.id.items){
@@ -87,28 +88,28 @@ public class HomeActivity extends AppCompatActivity implements NavigationView.On
             fragmentTransaction = fragmentManager.beginTransaction();
             fragmentTransaction.replace(R.id.container, new FragmentItems());
             fragmentTransaction.commit();
-
+            drawerLayout.closeDrawers();
         }
         if(menuItem.getItemId() == R.id.statistics){
             fragmentManager = getSupportFragmentManager();
             fragmentTransaction = fragmentManager.beginTransaction();
             fragmentTransaction.replace(R.id.container, new FragmentEstadisticas());
             fragmentTransaction.commit();
-
+            drawerLayout.closeDrawers();
         }
         if(menuItem.getItemId() == R.id.perfil){
             fragmentManager = getSupportFragmentManager();
             fragmentTransaction = fragmentManager.beginTransaction();
             fragmentTransaction.replace(R.id.container, new FragmentPerfil());
             fragmentTransaction.commit();
-
+            drawerLayout.closeDrawers();
         }
         if(menuItem.getItemId() == R.id.camara){
             fragmentManager = getSupportFragmentManager();
             fragmentTransaction = fragmentManager.beginTransaction();
             fragmentTransaction.replace(R.id.container, new FragmentCamara());
             fragmentTransaction.commit();
-
+            drawerLayout.closeDrawers();
         }
 
         if(menuItem.getItemId() == R.id.foro){
@@ -116,7 +117,7 @@ public class HomeActivity extends AppCompatActivity implements NavigationView.On
             fragmentTransaction = fragmentManager.beginTransaction();
             fragmentTransaction.replace(R.id.container, new FragmentForo());
             fragmentTransaction.commit();
-
+            drawerLayout.closeDrawers();
         }
 
         if(menuItem.getItemId() == R.id.signout) {
@@ -124,6 +125,7 @@ public class HomeActivity extends AppCompatActivity implements NavigationView.On
             fragmentTransaction = fragmentManager.beginTransaction();
             fragmentTransaction.replace(R.id.container, new FragmentSignOut());
             fragmentTransaction.commit();
+            drawerLayout.closeDrawers();
         }
 
         return false;
