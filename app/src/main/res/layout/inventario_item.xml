@@ -16,8 +16,7 @@
         <ImageView
             android:id="@+id/imagen_item"
             android:layout_width="100dp"
-            android:layout_height="100dp"
-            android:src="@drawable/des1">
+            android:layout_height="100dp">
 
         </ImageView>
 

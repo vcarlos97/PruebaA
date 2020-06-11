@@ -54,7 +54,6 @@ public class FragmentEstadisticas extends Fragment {
     public View onCreateView(@NonNull LayoutInflater inflater, @Nullable ViewGroup container, @Nullable Bundle savedInstanceState) {
         View view = inflater.inflate(R.layout.estadisticas_fragment, container, false);
         recyclerViewRanking = view.findViewById(R.id.recyclerId);
-
         //cargar la lista
         cargarLista();
         Button top5button = view.findViewById(R.id.top5personal);
@@ -94,18 +93,14 @@ public class FragmentEstadisticas extends Fragment {
                         if(response.isSuccessful()) {
                             List<Partida> rankingRespuesta = response.body();
                             mostrarInfo(rankingRespuesta);
-
                         }
-
                         else {
                             Log.e("DSA","Error :"+response.errorBody());
                         }
                     }
-
                     @Override
                     public void onFailure(Call<List<Partida>> call, Throwable t) {
                         Log.e("DSA","Error: No se pudo acceder a la API",t);
-
                     }
                 });
                 generalButton.setOnClickListener(new View.OnClickListener() {
@@ -116,20 +111,9 @@ public class FragmentEstadisticas extends Fragment {
                         cargarLista();
                     }
                 });
-
-
-
-
             }
         });
-
-
-
-
-
-
         return view;
-
     }
 
     public void cargarLista() {
@@ -160,9 +144,7 @@ public class FragmentEstadisticas extends Fragment {
                     List<Ranking> rankingRespuesta = response.body();
                     //listaRanking.addAll(rankingRespuesta);
                    mostrarDatos(rankingRespuesta);
-
                 }
-
                 else {
                     Log.e("DSA","Error :"+response.errorBody());
                 }
@@ -171,12 +153,8 @@ public class FragmentEstadisticas extends Fragment {
             @Override
             public void onFailure(Call<List<Ranking>> call, Throwable t) {
                 Log.e("DSA","Error: No se pudo acceder a la API",t);
-
             }
         });
-
-
-
     }
     public void mostrarDatos(List<Ranking> listaRanking) {
 
@@ -191,7 +169,6 @@ public class FragmentEstadisticas extends Fragment {
         recyclerViewRanking.setAdapter(adapterPartida);
     }
 
-
     @Override
     public void onAttach(@NonNull Context context) {
         super.onAttach(context);
@@ -200,15 +177,10 @@ public class FragmentEstadisticas extends Fragment {
             interfaceComunicaFragments=(iComunicaFragments) this.actividad;
         }
     }
-
     @Override
     public void onDetach() {
         super.onDetach();
     }
-
-
-
-
     }
 
 

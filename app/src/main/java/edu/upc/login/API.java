@@ -36,10 +36,10 @@ public interface API {
     Call<Token> register(@Body RegisterCredentials registerCredentials);
 
 @POST("game/compra")
-Call<Void> comprar (@Body Inventario inventario);
+    Call<Void> comprar (@Body Inventario inventario);
 
 @GET("game/objetos")
-Call<Inventario> inventario (@Query("token") String token);
+    Call<List<Inventario>> inventario (@Query("token") String token);
 
 @GET("user/comments")
     Call<List<Foro>> getComments();

@@ -5,6 +5,7 @@ public class Inventario {
     public int cantidad;
     public String idJugador;
 
+
     public Inventario(){}
 
     public Inventario(int idObjeto, int cantidad, String idJugador) {
@@ -37,6 +38,7 @@ public class Inventario {
     public void setIdJugador(String idJugador) {
         this.idJugador = idJugador;
     }
+
 
     @Override
     public String toString() {
