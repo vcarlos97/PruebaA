@@ -31,6 +31,10 @@
                 android:id="@+id/perfil"
                 android:icon="@drawable/ic_perfil"
                 android:title="Perfil"></item>
+            <item
+                android:id="@+id/signout"
+                android:icon="@drawable/ic_sign_out"
+                android:title="Cerrar sesión"></item>
         </menu>
 
     </item>

@@ -23,6 +23,7 @@ import edu.upc.login.Fragments.FragmentPerfil;
 import edu.upc.login.Fragments.FragmentEstadisticas;
 import edu.upc.login.Fragments.FragmentItems;
 import edu.upc.login.Fragments.FragmentHome;
+import edu.upc.login.Fragments.FragmentSignOut;
 
 public class HomeActivity extends AppCompatActivity implements NavigationView.OnNavigationItemSelectedListener, iComunicaFragments {
 
@@ -116,6 +117,13 @@ public class HomeActivity extends AppCompatActivity implements NavigationView.On
             fragmentTransaction.replace(R.id.container, new FragmentForo());
             fragmentTransaction.commit();
 
+        }
+
+        if(menuItem.getItemId() == R.id.signout) {
+            fragmentManager = getSupportFragmentManager();
+            fragmentTransaction = fragmentManager.beginTransaction();
+            fragmentTransaction.replace(R.id.container, new FragmentSignOut());
+            fragmentTransaction.commit();
         }
 
         return false;

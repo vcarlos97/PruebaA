@@ -14,6 +14,7 @@ import edu.upc.login.Entidades.RegisterCredentials;
 import edu.upc.login.Entidades.Token;
 import retrofit2.Call;
 import retrofit2.http.Body;
+import retrofit2.http.DELETE;
 import retrofit2.http.GET;
 import retrofit2.http.POST;
 import retrofit2.http.Query;
@@ -46,4 +47,7 @@ public interface API {
 
 @POST("user/newcomment")
     Call<Void> addComment(@Query("token") String token, @Body Comentario comentario);
+
+@DELETE("user/signout")
+    Call<Void> signOut(@Query("token") String token);
 }
