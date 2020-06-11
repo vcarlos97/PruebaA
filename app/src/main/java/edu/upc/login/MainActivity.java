@@ -29,7 +29,7 @@ public class MainActivity extends Activity {
 
     private API api;
 
-    private void guardarToken(String token){
+    private void guardarToken(String token, int monedas){
         //Creamos objeto preferences que se guardara en un XML llamado tokenUsuario y es privado porque
         //solo podremos acceder mediante nuestra app. Creamos un editor y guardamos el valor que le pasamos
         //como parametro con la llave "token"
@@ -39,6 +39,7 @@ public class MainActivity extends Activity {
         SharedPreferences preferences = getSharedPreferences("tokenUsuario", Context.MODE_PRIVATE);
         SharedPreferences.Editor editor = preferences.edit();
         editor.putString("token", token);
+        editor.putInt("monedas", monedas);
         editor.commit();
     }
 
@@ -49,7 +50,11 @@ public class MainActivity extends Activity {
         return token;
     }*/
 
-
+    /*private int obtenerMonedas(){
+        SharedPreferences preferences = getSharedPreferences("tokenUsuario", Context.MODE_PRIVATE);
+        int monedas = preferences.getInt("monedas", 0);
+        return monedas;
+    }*/
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {
@@ -119,7 +124,7 @@ public class MainActivity extends Activity {
                     public void onResponse(Call<Token> call, Response<Token> response) {
                         if(response.isSuccessful()) {
                             Token token = response.body();
-                            guardarToken(token.getToken());
+                            guardarToken(token.getToken(), token.getMonedas());
                             Intent i = new Intent(MainActivity.this, HomeActivity.class);
                             startActivity(i);
                             finish();

@@ -1,5 +1,6 @@
 package edu.upc.login.Fragments;
 
+import android.app.Activity;
 import android.content.Context;
 import android.content.SharedPreferences;
 import android.os.Bundle;
@@ -15,9 +16,12 @@ import androidx.annotation.NonNull;
 import androidx.annotation.Nullable;
 import androidx.fragment.app.Fragment;
 
+import java.lang.reflect.Method;
+
 import edu.upc.login.API;
 import edu.upc.login.Entidades.Inventario;
 import edu.upc.login.Entidades.Item;
+import edu.upc.login.HomeActivity;
 import edu.upc.login.R;
 import okhttp3.OkHttpClient;
 import okhttp3.logging.HttpLoggingInterceptor;
@@ -111,8 +115,12 @@ public class FragmentItemDetalle extends Fragment {
                     public void onResponse(Call<Void> call, Response<Void> response) {
                         if(response.code() == 400) Toast.makeText(getContext(), "No tienes suficientes monedas", Toast.LENGTH_SHORT).show();
                         else if (response.code() == 500) Toast.makeText(getContext(), "Error", Toast.LENGTH_SHORT).show();
-                        else
+                        else {
+                            String m = actualizarMonedas(Integer.parseInt((String) precio.getText()));
+                            TextView txtView = getActivity().findViewById(R.id.idmonedas);
+                            txtView.setText(m);
                             Toast.makeText(getContext(), "Tu compra se ha realizado con éxito", Toast.LENGTH_SHORT).show();
+                        }
                     }
 
                     @Override
@@ -123,5 +131,15 @@ public class FragmentItemDetalle extends Fragment {
             }
         });
         return view;
+    }
+
+    private String actualizarMonedas(int precio){
+        SharedPreferences preferences = getContext().getSharedPreferences("tokenUsuario", Context.MODE_PRIVATE);
+        int monedas = preferences.getInt("monedas", 0);
+        int newCoins = monedas - precio;
+        SharedPreferences.Editor editor = preferences.edit();
+        editor.putInt("monedas", newCoins);
+        editor.commit();
+        return String.valueOf(newCoins);
     }
 }

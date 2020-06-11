@@ -8,8 +8,11 @@ import androidx.drawerlayout.widget.DrawerLayout;
 import androidx.fragment.app.FragmentManager;
 import androidx.fragment.app.FragmentTransaction;
 
+import android.content.Context;
+import android.content.SharedPreferences;
 import android.os.Bundle;
 import android.view.MenuItem;
+import android.widget.TextView;
 
 
 import com.google.android.material.navigation.NavigationView;
@@ -31,6 +34,7 @@ public class HomeActivity extends AppCompatActivity implements NavigationView.On
     ActionBarDrawerToggle actionBarDrawerToggle;
     Toolbar toolbar;
     NavigationView navigationView;
+    TextView monedas;
 
     //variables para cargar fragment principal
 
@@ -40,11 +44,19 @@ public class HomeActivity extends AppCompatActivity implements NavigationView.On
     //variables del fragmentdetalle item
     FragmentItemDetalle detalleItemFragment;
 
+    private int obtenerMonedas(){
+        SharedPreferences preferences = getSharedPreferences("tokenUsuario", Context.MODE_PRIVATE);
+        int monedas = preferences.getInt("monedas", 0);
+        return monedas;
+    }
+
     @Override
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
         setContentView(R.layout.activity_home);
         toolbar=findViewById(R.id.toolbar);
+        monedas=findViewById(R.id.idmonedas);
+        monedas.setText(String.valueOf(obtenerMonedas()));
         setSupportActionBar(toolbar);
         drawerLayout = findViewById(R.id.drawer);
         navigationView=findViewById(R.id.navigationView);
