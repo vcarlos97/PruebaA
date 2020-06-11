@@ -1,7 +1,6 @@
 package edu.upc.login.Adaptadores;
 
 import android.content.Context;
-import android.util.Log;
 import android.view.LayoutInflater;
 import android.view.View;
 import android.view.ViewGroup;
@@ -13,21 +12,20 @@ import androidx.recyclerview.widget.RecyclerView;
 
 import com.squareup.picasso.Picasso;
 
-import java.util.ArrayList;
 import java.util.List;
 
-import edu.upc.login.Entidades.Ranking;
+import edu.upc.login.Entidades.Partida;
 import edu.upc.login.R;
 
-public class AdapterRanking extends RecyclerView.Adapter<AdapterRanking.ViewHolder> implements View.OnClickListener {
+public class AdapterPartidas extends RecyclerView.Adapter<AdapterPartidas.ViewHolder> implements View.OnClickListener {
 
     LayoutInflater inflater;
-    List<Ranking> model;
+    List<Partida> model;
 
     //listener
     private View.OnClickListener listener;
 
-    public AdapterRanking(Context context, List<Ranking> model){
+    public AdapterPartidas(Context context, List<Partida> model){
         this.inflater= LayoutInflater.from(context);
         this.model=model;
 
@@ -36,7 +34,7 @@ public class AdapterRanking extends RecyclerView.Adapter<AdapterRanking.ViewHold
     @NonNull
     @Override
     public ViewHolder onCreateViewHolder(@NonNull ViewGroup parent, int viewType) {
-        View view = inflater.inflate(R.layout.ranking_item,parent,false);
+        View view = inflater.inflate(R.layout.ranking_personal,parent,false);
         view.setOnClickListener(this);
         return new ViewHolder(view);
     }
@@ -47,12 +45,12 @@ public class AdapterRanking extends RecyclerView.Adapter<AdapterRanking.ViewHold
 
     @Override
     public void onBindViewHolder(@NonNull ViewHolder holder, int position) {
-
-        String username=model.get(position).getUsername();
         int puntos=model.get(position).getPuntos();
-        int imagen=model.get(position).getImagen();
-        holder.nombre.setText(username);
-        holder.puntos.setText(""+puntos);
+        String duracion=model.get(position).getDuracion();
+        int nivelMax=model.get(position).getNivelMax();
+        holder.duracion.setText("Duración: "+duracion+ " minutos");
+        holder.puntos.setText("Puntos: "+puntos);
+        holder.nivelMax.setText("Nivel Máximo: "+nivelMax);
         if(position==0) {
             Picasso.get().load(R.drawable.uno).into(holder.imagen);
         }
@@ -87,13 +85,14 @@ public class AdapterRanking extends RecyclerView.Adapter<AdapterRanking.ViewHold
 
     public class ViewHolder extends RecyclerView.ViewHolder{
 
-        TextView nombre, puntos;
+        TextView duracion, puntos, nivelMax;
         ImageView imagen;
 
         public ViewHolder(@NonNull View itemView) {
             super(itemView);
-            nombre=itemView.findViewById(R.id.username);
+            duracion=itemView.findViewById(R.id.duracion);
             puntos=itemView.findViewById(R.id.puntos);
+            nivelMax=itemView.findViewById(R.id.username);
             imagen=itemView.findViewById(R.id.foto);
         }
     }

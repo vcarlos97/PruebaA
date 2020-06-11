@@ -16,8 +16,7 @@
         <ImageView
             android:id="@+id/imagen_item"
             android:layout_width="100dp"
-            android:layout_height="100dp"
-            android:src="@drawable/des1">
+            android:layout_height="100dp">
 
         </ImageView>
 
@@ -36,24 +35,12 @@
         </TextView>
 
         <TextView
-            android:id="@+id/descripcion"
+            android:id="@+id/cantidad_item"
             android:layout_width="match_parent"
             android:layout_height="wrap_content"
-            android:text="Descripción"
+            android:text="Cantidad"
             android:textStyle="bold"
             android:layout_below="@id/nombre_item"
-            android:layout_toEndOf="@id/imagen_item"
-            android:layout_marginLeft="10dp"
-            android:layout_marginStart="10dp">
-        </TextView>
-
-        <TextView
-            android:id="@+id/precio"
-            android:layout_width="match_parent"
-            android:layout_height="wrap_content"
-            android:text="Precio"
-            android:textStyle="bold"
-            android:layout_below="@id/descripcion"
             android:layout_toEndOf="@id/imagen_item"
             android:layout_marginLeft="10dp"
             android:layout_marginStart="10dp">

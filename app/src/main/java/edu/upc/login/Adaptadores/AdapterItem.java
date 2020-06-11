@@ -1,4 +1,5 @@
 package edu.upc.login.Adaptadores;
+
 import android.content.Context;
 import android.view.LayoutInflater;
 import android.view.View;
@@ -45,12 +46,12 @@ public class AdapterItem extends RecyclerView.Adapter<AdapterItem.ViewHolder> im
 
         String nombre=model.get(position).getNombre();
         String descripcion=model.get(position).getDescripcion();
+        int precio = model.get(position).getPrecio();
         int imagen = model.get(position).getImagenid();
         holder.nombres.setText(nombre);
         holder.descripciones.setText(descripcion);
+        holder.precios.setText("Precio: " + precio);
         holder.imagen.setImageResource(imagen);
-
-
     }
 
     @Override
@@ -67,13 +68,14 @@ public class AdapterItem extends RecyclerView.Adapter<AdapterItem.ViewHolder> im
 
     public class ViewHolder extends RecyclerView.ViewHolder{
 
-        TextView nombres, descripciones;
+        TextView nombres, descripciones, precios;
         ImageView imagen;
 
         public ViewHolder(@NonNull View itemView) {
             super(itemView);
             nombres=itemView.findViewById(R.id.nombre_item);
             descripciones=itemView.findViewById(R.id.descripcion);
+            precios=itemView.findViewById(R.id.precio);
             imagen=itemView.findViewById(R.id.imagen_item);
         }
     }

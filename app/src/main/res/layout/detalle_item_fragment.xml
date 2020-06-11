@@ -1,17 +1,60 @@
 <?xml version="1.0" encoding="utf-8"?>
-<LinearLayout
-    xmlns:android="http://schemas.android.com/apk/res/android" android:layout_width="match_parent"
+<androidx.constraintlayout.widget.ConstraintLayout
+    xmlns:android="http://schemas.android.com/apk/res/android"
+    xmlns:app="http://schemas.android.com/apk/res-auto"
+    xmlns:tools="http://schemas.android.com/tools"
+    android:layout_width="match_parent"
     android:layout_height="match_parent"
     android:orientation="vertical"
     android:paddingTop="60dp">
+
     <TextView
-        android:id="@+id/titulo_detalle_mostrar"
+        android:id="@+id/titulo"
         android:layout_width="match_parent"
         android:layout_height="wrap_content"
-        android:text="Detalle item"
-        android:textStyle="bold"
+        android:gravity="center"
+        android:text="Nombre Item"
         android:textSize="30sp"
-        android:gravity="center">
+        android:textStyle="bold"
+        app:layout_constraintBottom_toTopOf="@+id/imagen_detalle"
+        app:layout_constraintEnd_toEndOf="parent"
+        app:layout_constraintHorizontal_bias="0.0"
+        app:layout_constraintStart_toStartOf="parent"
+        app:layout_constraintTop_toTopOf="parent"
+        app:layout_constraintVertical_bias="0.083">
+
+    </TextView>
+
+    <TextView
+        android:id="@+id/precio"
+        android:layout_width="247dp"
+        android:layout_height="29dp"
+        android:text="Precio:"
+        android:textSize="20sp"
+        android:textStyle="bold"
+        app:layout_constraintBottom_toBottomOf="parent"
+        app:layout_constraintEnd_toEndOf="parent"
+        app:layout_constraintHorizontal_bias="0.792"
+        app:layout_constraintStart_toStartOf="parent"
+        app:layout_constraintTop_toBottomOf="@+id/imagen_detalle"
+        app:layout_constraintVertical_bias="0.423">
+
+    </TextView>
+
+    <TextView
+        android:id="@+id/titulo_detalle_mostrar2"
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        android:gravity="center"
+        android:text="Descripción"
+        android:textSize="30sp"
+        android:textStyle="bold"
+        app:layout_constraintBottom_toBottomOf="parent"
+        app:layout_constraintEnd_toEndOf="parent"
+        app:layout_constraintHorizontal_bias="0.0"
+        app:layout_constraintStart_toStartOf="parent"
+        app:layout_constraintTop_toBottomOf="@+id/imagen_detalle"
+        app:layout_constraintVertical_bias="0.019">
 
     </TextView>
 
@@ -19,33 +62,107 @@
         android:id="@+id/imagen_detalle"
         android:layout_width="150dp"
         android:layout_height="150dp"
-        android:src="@mipmap/ic_launcher_round"
         android:layout_gravity="center"
         android:paddingTop="10dp"
-        >
+        android:src="@mipmap/ic_launcher_round"
+        app:layout_constraintBottom_toBottomOf="parent"
+        app:layout_constraintEnd_toEndOf="parent"
+        app:layout_constraintHorizontal_bias="0.498"
+        app:layout_constraintStart_toStartOf="parent"
+        app:layout_constraintTop_toTopOf="parent"
+        app:layout_constraintVertical_bias="0.118">
 
     </ImageView>
 
-    <TextView
-        android:id="@+id/titulo_detalle_mostrar2"
-        android:layout_width="match_parent"
-        android:layout_height="wrap_content"
-        android:text="Nombre item:"
-        android:textStyle="bold"
-        android:textSize="30sp"
-        android:layout_marginLeft="10dp">
+    <Button
+        android:id="@+id/comprar"
+        android:layout_width="113dp"
+        android:layout_height="61dp"
+        android:background="@drawable/button_rounded"
+        android:text="Comprar"
+        app:layout_constraintBottom_toBottomOf="parent"
+        app:layout_constraintEnd_toEndOf="parent"
+        app:layout_constraintStart_toStartOf="parent"
+        app:layout_constraintTop_toTopOf="parent"
+        app:layout_constraintVertical_bias="0.922" />
 
-    </TextView>
+    <Button
+        android:id="@+id/menos"
+        android:layout_width="65dp"
+        android:layout_height="32dp"
+        android:background="@drawable/button_rounded"
+        android:text="-"
+        app:layout_constraintBottom_toBottomOf="parent"
+        app:layout_constraintEnd_toStartOf="@+id/cantidad"
+        app:layout_constraintHorizontal_bias="1.0"
+        app:layout_constraintStart_toStartOf="parent"
+        app:layout_constraintTop_toTopOf="parent"
+        app:layout_constraintVertical_bias="0.776" />
 
     <TextView
-        android:id="@+id/nombre_detalle"
-        android:layout_width="match_parent"
-        android:layout_height="wrap_content"
+        android:id="@+id/cantidad"
+        android:layout_width="51dp"
+        android:layout_height="69dp"
         android:gravity="center"
+        android:text="1"
+        app:layout_constraintBottom_toBottomOf="parent"
+        app:layout_constraintEnd_toEndOf="parent"
+        app:layout_constraintHorizontal_bias="0.498"
+        app:layout_constraintStart_toStartOf="parent"
+        app:layout_constraintTop_toTopOf="parent"
+        app:layout_constraintVertical_bias="0.785" />
 
-        android:text="Detalle item"
-        android:textSize="30sp">
+    <Button
+        android:id="@+id/mas"
+        android:layout_width="65dp"
+        android:layout_height="32dp"
+        android:background="@drawable/button_rounded"
+        android:text="+"
+        app:layout_constraintBottom_toBottomOf="parent"
+        app:layout_constraintEnd_toEndOf="parent"
+        app:layout_constraintHorizontal_bias="0.664"
+        app:layout_constraintStart_toStartOf="parent"
+        app:layout_constraintTop_toTopOf="parent"
+        app:layout_constraintVertical_bias="0.775" />
 
-    </TextView>
+    <TextView
+        android:id="@+id/textdescricion"
+        android:layout_width="match_parent"
+        android:layout_height="82dp"
+        android:gravity="center"
+        android:text="TextView"
+        app:layout_constraintBottom_toTopOf="@+id/precio"
+        app:layout_constraintEnd_toEndOf="parent"
+        app:layout_constraintHorizontal_bias="0.0"
+        app:layout_constraintStart_toStartOf="parent"
+        app:layout_constraintTop_toBottomOf="@+id/titulo_detalle_mostrar2"
+        app:layout_constraintVertical_bias="0.0" />
 
-</LinearLayout>
+    <TextView
+        android:id="@+id/textprecio"
+        android:layout_width="160dp"
+        android:layout_height="28dp"
+        android:gravity="center"
+        android:text="200"
+        android:textSize="20sp"
+        app:layout_constraintBottom_toBottomOf="@+id/precio"
+        app:layout_constraintEnd_toEndOf="@+id/precio"
+        app:layout_constraintHorizontal_bias="0.19"
+        app:layout_constraintStart_toStartOf="@+id/precio"
+        app:layout_constraintTop_toTopOf="@+id/precio"
+        app:layout_constraintVertical_bias="1.0" />
+
+    <ImageView
+        android:id="@+id/imageView4"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        app:layout_constraintBottom_toBottomOf="@+id/textprecio"
+        app:layout_constraintEnd_toEndOf="@+id/textprecio"
+        app:layout_constraintHorizontal_bias="0.805"
+        app:layout_constraintStart_toStartOf="@+id/textprecio"
+        app:layout_constraintTop_toTopOf="@+id/textprecio"
+        app:layout_constraintVertical_bias="0.25"
+        app:srcCompat="@drawable/ic_moneda_naranja" />
+
+
+</androidx.constraintlayout.widget.ConstraintLayout>
