@@ -12,6 +12,7 @@ import edu.upc.login.Entidades.Partida;
 import edu.upc.login.Entidades.Ranking;
 import edu.upc.login.Entidades.RegisterCredentials;
 import edu.upc.login.Entidades.Token;
+import edu.upc.login.Entidades.User;
 import retrofit2.Call;
 import retrofit2.http.Body;
 import retrofit2.http.DELETE;
@@ -50,4 +51,11 @@ public interface API {
 
 @DELETE("user/signout")
     Call<Void> signOut(@Query("token") String token);
+
+@GET("user/user")
+    Call<User> getUser(@Query("token") String token);
+
+@POST("user/update")
+    Call<Void> updateUser(@Body User user);
+
 }

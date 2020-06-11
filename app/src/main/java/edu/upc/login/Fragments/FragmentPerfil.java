@@ -18,7 +18,7 @@ import androidx.fragment.app.Fragment;
 
 import edu.upc.login.API;
 import edu.upc.login.R;
-import edu.upc.login.User;
+import edu.upc.login.Entidades.User;
 import okhttp3.OkHttpClient;
 import okhttp3.logging.HttpLoggingInterceptor;
 import retrofit2.Call;
@@ -169,9 +169,9 @@ public class FragmentPerfil extends Fragment {
         else
             contraseña = newpassword.getText().toString();
 
-
-
-
+        nombre = newusername.getText().toString();
+        email = newmail.getText().toString();
+        
         User user = new User(id, nombre, email, contraseña, "active");
 
             HttpLoggingInterceptor interceptor = new HttpLoggingInterceptor();
