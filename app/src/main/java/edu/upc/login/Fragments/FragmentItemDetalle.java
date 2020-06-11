@@ -116,7 +116,7 @@ public class FragmentItemDetalle extends Fragment {
                         if(response.code() == 400) Toast.makeText(getContext(), "No tienes suficientes monedas", Toast.LENGTH_SHORT).show();
                         else if (response.code() == 500) Toast.makeText(getContext(), "Error", Toast.LENGTH_SHORT).show();
                         else {
-                            String m = actualizarMonedas(Integer.parseInt((String) precio.getText()));
+                            String m = actualizarMonedas(Integer.parseInt((String) precio.getText()), Integer.parseInt((String) cantidad.getText()));
                             TextView txtView = getActivity().findViewById(R.id.idmonedas);
                             txtView.setText(m);
                             Toast.makeText(getContext(), "Tu compra se ha realizado con éxito", Toast.LENGTH_SHORT).show();
@@ -133,10 +133,10 @@ public class FragmentItemDetalle extends Fragment {
         return view;
     }
 
-    private String actualizarMonedas(int precio){
+    private String actualizarMonedas(int precio, int cantidad){
         SharedPreferences preferences = getContext().getSharedPreferences("tokenUsuario", Context.MODE_PRIVATE);
         int monedas = preferences.getInt("monedas", 0);
-        int newCoins = monedas - precio;
+        int newCoins = monedas - (precio*cantidad);
         SharedPreferences.Editor editor = preferences.edit();
         editor.putInt("monedas", newCoins);
         editor.commit();
