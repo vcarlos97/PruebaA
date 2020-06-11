@@ -74,6 +74,10 @@ public class FragmentSignOut extends Fragment {
                 signOut.enqueue(new Callback<Void>() {
                     @Override
                     public void onResponse(Call<Void> call, Response<Void> response) {
+                        SharedPreferences pref = getContext().getSharedPreferences("tokenUsuario", Context.MODE_PRIVATE);
+                        SharedPreferences.Editor editor = pref.edit();
+                        editor.clear();
+                        editor.commit();
                         Toast.makeText(getContext(), "Vuelve pronto :(", Toast.LENGTH_SHORT).show();
                         Intent i = new Intent(getContext(), MainActivity.class);
                         startActivity(i);

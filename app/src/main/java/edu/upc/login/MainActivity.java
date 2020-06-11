@@ -56,97 +56,105 @@ public class MainActivity extends Activity {
         return monedas;
     }*/
 
+    public boolean isToken() {
+        SharedPreferences pref = getSharedPreferences("tokenUsuario", Context.MODE_PRIVATE);
+        if(pref.contains("token")) {
+            return true;
+        }
+        else return false;
+    }
+
     @Override
     protected void onCreate(Bundle savedInstanceState) {
-        super.onCreate(savedInstanceState);
-        setTheme(R.style.AppTheme);
-        setContentView(R.layout.activity_main);
-
-        //Creamos interceptor
-        HttpLoggingInterceptor interceptor = new HttpLoggingInterceptor();
-        interceptor.setLevel(HttpLoggingInterceptor.Level.BODY);
-
-        //Creamos cliente
-        OkHttpClient client = new OkHttpClient.Builder()
-                .addInterceptor(interceptor)
-                .build();
-
-        //Crear retrofit
-        final Retrofit retrofit = new Retrofit.Builder()
-                .baseUrl("http://147.83.7.203:8080/dsaApp/")
-                .addConverterFactory(GsonConverterFactory.create())
-                .client(client)
-                .build();
-
-        //Llamamos a servicios que hemos definido en la API
-        api = retrofit.create(API.class);
-
-        //Inicializamos el LayOut
-        final TextView nombre = findViewById((R.id.nombreText));
-        final TextView password = findViewById((R.id.passwordText));
-        Button registrarseButton = findViewById(R.id.registrarseButton);
-        registrarseButton.setOnClickListener(new View.OnClickListener() {
-            @Override
-            public void onClick(View v) {
-                Intent i=new Intent(MainActivity.this,RegisterActivity.class);
+            super.onCreate(savedInstanceState);
+            if(isToken()){
+                Intent i = new Intent(MainActivity.this, HomeActivity.class);
                 startActivity(i);
-            }
-        });
+                finish();
+            } else {
+            setTheme(R.style.AppTheme);
+            setContentView(R.layout.activity_main);
 
+            //Creamos interceptor
+            HttpLoggingInterceptor interceptor = new HttpLoggingInterceptor();
+            interceptor.setLevel(HttpLoggingInterceptor.Level.BODY);
 
+            //Creamos cliente
+            OkHttpClient client = new OkHttpClient.Builder()
+                    .addInterceptor(interceptor)
+                    .build();
 
+            //Crear retrofit
+            final Retrofit retrofit = new Retrofit.Builder()
+                    .baseUrl("http://147.83.7.203:8080/dsaApp/")
+                    .addConverterFactory(GsonConverterFactory.create())
+                    .client(client)
+                    .build();
 
-        Button loginButton = findViewById(R.id.loginButton);
-        //Cuando clickamos en loginButton -> Creamos llamamos a los strings nombre y password, los metemos en variable login
-        loginButton.setOnClickListener(new View.OnClickListener() {
-            @Override
-            public void onClick(View v) {
-                /********PROGRESS BAR******/
-                ConstraintLayout cl = (ConstraintLayout) findViewById(R.id.login_container);
-                ProgressBar progressBar = new ProgressBar(getApplicationContext(), null, android.R.attr.progressBarStyleHorizontal);
-                // Crea layout parameters para el ProgressBar
-                RelativeLayout.LayoutParams lp = new RelativeLayout.LayoutParams( RelativeLayout.LayoutParams.MATCH_PARENT, RelativeLayout.LayoutParams.WRAP_CONTENT);
-                progressBar.setLayoutParams(lp);
-                //Define como indeterminado.
-                progressBar.setIndeterminate(true);
-                // Agrega el ProgressBar al Layout
-                cl.addView(progressBar);
-                /***************************/
+            //Llamamos a servicios que hemos definido en la API
+            api = retrofit.create(API.class);
 
-                LoginCredentials loginc = new LoginCredentials();
-                loginc.setNombre((String) nombre.getText().toString());
-                loginc.setPassword((String) password.getText().toString());
-
-                Call<Token> call = api.login(loginc);
-
-                call.enqueue(new Callback<Token>() {
-                    @Override
-                    public void onResponse(Call<Token> call, Response<Token> response) {
-                        if(response.isSuccessful()) {
-                            Token token = response.body();
-                            guardarToken(token.getToken(), token.getMonedas());
-                            Intent i = new Intent(MainActivity.this, HomeActivity.class);
-                            startActivity(i);
-                            finish();
-                        }
-
-
-                        else {
-                            Toast.makeText(getApplicationContext(), "Error " + response.code() + ": " +response.message(), Toast.LENGTH_SHORT).show();
-                        }
-                    }
-
-                    @Override
-                    public void onFailure(Call<Token> call, Throwable t) {
-                        Toast toast = Toast.makeText(getApplicationContext(), "Error al acceder a la API", Toast.LENGTH_SHORT);
-                        toast.show();
+            //Inicializamos el LayOut
+            final TextView nombre = findViewById((R.id.nombreText));
+            final TextView password = findViewById((R.id.passwordText));
+            Button registrarseButton = findViewById(R.id.registrarseButton);
+            registrarseButton.setOnClickListener(new View.OnClickListener() {
+                @Override
+                public void onClick(View v) {
+                    Intent i = new Intent(MainActivity.this, RegisterActivity.class);
+                    startActivity(i);
                 }
-                });
-            }
+            });
+
+
+            Button loginButton = findViewById(R.id.loginButton);
+            //Cuando clickamos en loginButton -> Creamos llamamos a los strings nombre y password, los metemos en variable login
+            loginButton.setOnClickListener(new View.OnClickListener() {
+                @Override
+                public void onClick(View v) {
+                    /********PROGRESS BAR******/
+                    ConstraintLayout cl = (ConstraintLayout) findViewById(R.id.login_container);
+                    ProgressBar progressBar = new ProgressBar(getApplicationContext(), null, android.R.attr.progressBarStyleHorizontal);
+                    // Crea layout parameters para el ProgressBar
+                    RelativeLayout.LayoutParams lp = new RelativeLayout.LayoutParams(RelativeLayout.LayoutParams.MATCH_PARENT, RelativeLayout.LayoutParams.WRAP_CONTENT);
+                    progressBar.setLayoutParams(lp);
+                    //Define como indeterminado.
+                    progressBar.setIndeterminate(true);
+                    // Agrega el ProgressBar al Layout
+                    cl.addView(progressBar);
+                    /***************************/
+
+                    LoginCredentials loginc = new LoginCredentials();
+                    loginc.setNombre((String) nombre.getText().toString());
+                    loginc.setPassword((String) password.getText().toString());
+
+                    Call<Token> call = api.login(loginc);
+
+                    call.enqueue(new Callback<Token>() {
+                        @Override
+                        public void onResponse(Call<Token> call, Response<Token> response) {
+                            if (response.isSuccessful()) {
+                                Token token = response.body();
+                                guardarToken(token.getToken(), token.getMonedas());
+                                Intent i = new Intent(MainActivity.this, HomeActivity.class);
+                                startActivity(i);
+                                finish();
+                            } else {
+                                Toast.makeText(getApplicationContext(), "Error " + response.code() + ": " + response.message(), Toast.LENGTH_SHORT).show();
+                            }
+                        }
+
+                        @Override
+                        public void onFailure(Call<Token> call, Throwable t) {
+                            Toast toast = Toast.makeText(getApplicationContext(), "Error al acceder a la API", Toast.LENGTH_SHORT);
+                            toast.show();
+                        }
+                    });
+                }
 
             });
 
+        }
+
     }
-
-
 }
