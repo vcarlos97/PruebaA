@@ -1,7 +1,5 @@
 package edu.upc.login;
 
-
-
 import java.util.List;
 
 import edu.upc.login.Entidades.Ranking;
@@ -10,6 +8,7 @@ import retrofit2.Call;
 import retrofit2.http.Body;
 import retrofit2.http.GET;
 import retrofit2.http.POST;
+import retrofit2.http.Query;
 
 public interface API {
 /*    @GET("tracks")
@@ -36,4 +35,9 @@ Call <RankingRespuesta> getRanking();
 @POST("auth/register")
     Call<Token> register(@Body RegisterCredentials registerCredentials);
 
+@GET("user/user")
+    Call<User> getUser(@Query("token") String token);
+
+@POST("user/update")
+    Call<Void> updateUser(@Body User user);
 }

@@ -2,28 +2,30 @@ package edu.upc.login;
 
 public class User {
 
-    public String id;
+    public String idUser;
     public String nombre;
     public String mail;
     public String password;
+    public String status;
 
     public User(){}
 
-    public User(String id, String nombre, String mail, String password) {
+    public User(String id, String nombre, String mail, String password, String status) {
         this();
-        this.id = id;
+        this.idUser = id;
         this.nombre = nombre;
         this.mail = mail;
         this.password = password;
+        this.status = status;
     }
 
 
     public String getId() {
-        return id;
+        return idUser;
     }
 
     public void setId(String id) {
-        this.id = id;
+        this.idUser = id;
     }
 
     public String getNombre() {
@@ -52,7 +54,7 @@ public class User {
 
     @Override
     public String toString() {
-        return "User [id="+id+", name=" + nombre + ", mail=" + mail +"]";
+        return "User [id="+idUser+", name=" + nombre + ", mail=" + mail +"]";
     }
 
 }
