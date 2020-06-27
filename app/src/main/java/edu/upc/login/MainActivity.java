@@ -14,6 +14,8 @@ import android.widget.Toast;
 
 import androidx.constraintlayout.widget.ConstraintLayout;
 
+import com.unity3d.player.UnityPlayerActivity;
+
 import edu.upc.login.Entidades.LoginCredentials;
 import edu.upc.login.Entidades.Token;
 import okhttp3.OkHttpClient;
@@ -67,6 +69,7 @@ public class MainActivity extends Activity {
     @Override
     protected void onCreate(Bundle savedInstanceState) {
             super.onCreate(savedInstanceState);
+
             if(isToken()){
                 Intent i = new Intent(MainActivity.this, HomeActivity.class);
                 startActivity(i);

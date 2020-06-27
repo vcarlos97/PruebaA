@@ -1,2 +1,5 @@
+include ':unityLibrary-moro'
+include ':unityLibrary-debug'
+include ':unityLibrary-release'
 rootProject.name='LogIn'
 include ':app'
