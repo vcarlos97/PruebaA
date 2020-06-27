@@ -39,6 +39,7 @@ public class FragmentHome extends Fragment {
 
     Button play;
     private API api;
+    StringBuffer o;
     List<Inventario> objetos = new ArrayList<>();
     List<Integer> vector = new ArrayList<>();
 
@@ -75,13 +76,15 @@ public class FragmentHome extends Fragment {
                     public void onResponse(Call<List<Inventario>> call, Response<List<Inventario>> response) {
                         if(response.isSuccessful()) {
                             objetos = response.body();
-                            for(int i=0; i<objetos.size();i++){
-                                vector.add(objetos.get(i).getIdObjeto());
-                                vector.add(objetos.get(i).getCantidad());
+                            o = new StringBuffer();
+                            for(int i=0; i<objetos.size(); i++){
+                                o.append(objetos.get(i).getIdObjeto()+"/");
+                                if(i!=objetos.size()-1) o.append(objetos.get(i).getCantidad()+"/");
+                                else o.append(objetos.get(i).getCantidad());
                             }
-                            Log.e("objetos", String.valueOf(vector));
+                            Log.e("objetos", o.toString());
                             Intent i = new Intent(getContext(), UnityPlayerActivity.class);
-                            i.putExtra("objetos", String.valueOf(vector));
+                            i.putExtra("objetos", o.toString());
                             startActivity(i);
                         }
                         else {
