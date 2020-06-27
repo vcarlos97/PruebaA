@@ -51,9 +51,48 @@ public class FragmentHome extends Fragment {
         play.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View v) {
-                Intent i = new Intent(getContext(), UnityPlayerActivity.class);
-                i.putExtra("objetos", String.valueOf(vector));
-                startActivity(i);
+                //Creamos interceptor
+                HttpLoggingInterceptor interceptor = new HttpLoggingInterceptor();
+                interceptor.setLevel(HttpLoggingInterceptor.Level.BODY);
+
+                //Creamos cliente
+                OkHttpClient client = new OkHttpClient.Builder()
+                        .addInterceptor(interceptor)
+                        .build();
+
+                //Crear retrofit
+                final Retrofit retrofit = new Retrofit.Builder()
+                        .baseUrl("http://147.83.7.203:8080/dsaApp/")
+                        .addConverterFactory(GsonConverterFactory.create())
+                        .client(client)
+                        .build();
+
+                //Llamamos a servicios que hemos definido en la API
+                api = retrofit.create(API.class);
+                Call<List<Inventario>> call = api.inventario(obtenerToken());
+                call.enqueue(new Callback<List<Inventario>>() {
+                    @Override
+                    public void onResponse(Call<List<Inventario>> call, Response<List<Inventario>> response) {
+                        if(response.isSuccessful()) {
+                            objetos = response.body();
+                            for(int i=0; i<objetos.size();i++){
+                                vector.add(objetos.get(i).getIdObjeto());
+                                vector.add(objetos.get(i).getCantidad());
+                            }
+                            Log.e("objetos", String.valueOf(vector));
+                            Intent i = new Intent(getContext(), UnityPlayerActivity.class);
+                            i.putExtra("objetos", String.valueOf(vector));
+                            startActivity(i);
+                        }
+                        else {
+                            Log.e("DSA","Error :"+response.errorBody());
+                        }
+                    }
+                    @Override
+                    public void onFailure(Call<List<Inventario>> call, Throwable t) {
+                        Log.e("DSA","Error: No se pudo acceder a la API",t);
+                    }
+                });
             }
         });
 
@@ -68,44 +107,6 @@ public class FragmentHome extends Fragment {
 
     private void getObjetosPlayer() {
 
-        //Creamos interceptor
-        HttpLoggingInterceptor interceptor = new HttpLoggingInterceptor();
-        interceptor.setLevel(HttpLoggingInterceptor.Level.BODY);
 
-        //Creamos cliente
-        OkHttpClient client = new OkHttpClient.Builder()
-                .addInterceptor(interceptor)
-                .build();
-
-        //Crear retrofit
-        final Retrofit retrofit = new Retrofit.Builder()
-                .baseUrl("http://147.83.7.203:8080/dsaApp/")
-                .addConverterFactory(GsonConverterFactory.create())
-                .client(client)
-                .build();
-
-        //Llamamos a servicios que hemos definido en la API
-        api = retrofit.create(API.class);
-        Call<List<Inventario>> call = api.inventario(obtenerToken());
-        call.enqueue(new Callback<List<Inventario>>() {
-            @Override
-            public void onResponse(Call<List<Inventario>> call, Response<List<Inventario>> response) {
-                if(response.isSuccessful()) {
-                    objetos = response.body();
-                    for(int i=0; i<objetos.size();i++){
-                        vector.add(objetos.get(i).getIdObjeto());
-                        vector.add(objetos.get(i).getCantidad());
-                    }
-                    Log.e("objetos", String.valueOf(vector));
-                }
-                else {
-                    Log.e("DSA","Error :"+response.errorBody());
-                }
-            }
-            @Override
-            public void onFailure(Call<List<Inventario>> call, Throwable t) {
-                Log.e("DSA","Error: No se pudo acceder a la API",t);
-            }
-        });
     }
 }
