@@ -26,7 +26,6 @@ public class Singleton {
     private static Singleton instance;
     private API api;
     List<Inventario> objetos = new ArrayList<>();
-    StringBuffer o;
 
 
     private Singleton() {
@@ -54,11 +53,15 @@ public class Singleton {
         return instance;
     }
 
-    public String getObjetos() {
-        return o.toString();
+    public API getApi(){
+        return this.api;
     }
-    public void setObjetos(StringBuffer o) {
-        this.o = o;
+
+    public List<Inventario> getObjetos() {
+        return objetos;
+    }
+    public void setObjetos(List<Inventario> o) {
+        this.objetos = o;
     }
 
     public void requestObjetos(String token) {
@@ -67,15 +70,7 @@ public class Singleton {
             @Override
             public void onResponse(Call<List<Inventario>> call, Response<List<Inventario>> response) {
                 if (response.isSuccessful()) {
-                    objetos = response.body();
-                    o = new StringBuffer();
-                    for (int i = 0; i < objetos.size(); i++) {
-                        o.append(objetos.get(i).getIdObjeto() + "/");
-                        if (i != objetos.size() - 1) o.append(objetos.get(i).getCantidad() + "/");
-                        else o.append(objetos.get(i).getCantidad());
-                    }
-                    Singleton.getInstance().setObjetos(o);
-                    Log.e("objetos", o.toString());
+                    Singleton.getInstance().setObjetos(response.body());
                 } else {
                     Log.e("DSA", "Error :" + response.errorBody());
                 }

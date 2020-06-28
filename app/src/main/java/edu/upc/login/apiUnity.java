@@ -7,20 +7,20 @@ import android.os.Bundle;
 
 import com.unity3d.player.UnityPlayerActivity;
 
-public class apiUnity extends AppCompatActivity {
-    String token;
-    String objetos;
+import java.util.List;
 
-    @Override
-    protected void onCreate(Bundle savedInstanceState) {
-        super.onCreate(savedInstanceState);
-        Intent intent = getIntent();
-        token = intent.getStringExtra("token");
-        Singleton.getInstance().requestObjetos(token);
-        objetos = Singleton.getInstance().getObjetos();
-        Intent i = new Intent(getApplicationContext(), UnityPlayerActivity.class);
-        i.putExtra("objetos", objetos);
-        startActivity(i);
+import edu.upc.login.Entidades.Inventario;
+
+public class apiUnity {
+
+    public static String getObjetos(){
+        List<Inventario> objetos = Singleton.getInstance().getObjetos();
+        StringBuffer o = new StringBuffer();
+        for(int i=0; i<objetos.size(); i++){
+            o.append(objetos.get(i).getIdObjeto()+"/");
+            if(i!=objetos.size()-1) o.append(objetos.get(i).getCantidad()+"/");
+            else o.append(objetos.get(i).getCantidad());
+        }
+        return o.toString();
     }
-
 }

@@ -27,6 +27,7 @@ import edu.upc.login.Adaptadores.AdapterInventario;
 import edu.upc.login.Entidades.Inventario;
 import edu.upc.login.Entidades.Item;
 import edu.upc.login.R;
+import edu.upc.login.Singleton;
 import edu.upc.login.apiUnity;
 import okhttp3.OkHttpClient;
 import okhttp3.logging.HttpLoggingInterceptor;
@@ -45,58 +46,13 @@ public class FragmentHome extends Fragment {
     @Override
     public View onCreateView(@NonNull LayoutInflater inflater, @Nullable ViewGroup container, @Nullable Bundle savedInstanceState) {
         View view  = inflater.inflate(R.layout.main_fragment,container,false);
-        this.getObjetosPlayer();
+        Singleton.getInstance().requestObjetos(obtenerToken());
         play = view.findViewById(R.id.playBtn);
         play.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View v) {
-               /* //Creamos interceptor
-                HttpLoggingInterceptor interceptor = new HttpLoggingInterceptor();
-                interceptor.setLevel(HttpLoggingInterceptor.Level.BODY);
-
-                //Creamos cliente
-                OkHttpClient client = new OkHttpClient.Builder()
-                        .addInterceptor(interceptor)
-                        .build();
-
-                //Crear retrofit
-                final Retrofit retrofit = new Retrofit.Builder()
-                        .baseUrl("http://147.83.7.203:8080/dsaApp/")
-                        .addConverterFactory(GsonConverterFactory.create())
-                        .client(client)
-                        .build();
-
-                //Llamamos a servicios que hemos definido en la API
-                api = retrofit.create(API.class);
-                Call<List<Inventario>> call = api.inventario(obtenerToken());
-                call.enqueue(new Callback<List<Inventario>>() {
-                    @Override
-                    public void onResponse(Call<List<Inventario>> call, Response<List<Inventario>> response) {
-                        if(response.isSuccessful()) {
-                            objetos = response.body();
-                            o = new StringBuffer();
-                            for(int i=0; i<objetos.size(); i++){
-                                o.append(objetos.get(i).getIdObjeto()+"/");
-                                if(i!=objetos.size()-1) o.append(objetos.get(i).getCantidad()+"/");
-                                else o.append(objetos.get(i).getCantidad());
-                            }
-                            Log.e("objetos", o.toString());
-                            Intent i = new Intent(getContext(), UnityPlayerActivity.class);
-                            i.putExtra("objetos", o.toString());
-                            startActivity(i);
-                        }
-                        else {
-                            Log.e("DSA","Error :"+response.errorBody());
-                        }
-                    }
-                    @Override
-                    public void onFailure(Call<List<Inventario>> call, Throwable t) {
-                        Log.e("DSA","Error: No se pudo acceder a la API",t);
-                    }
-                });*/
-               Intent i = new Intent(getContext(), apiUnity.class);
-               i.putExtra("token", obtenerToken());
-               startActivity(i);
+                Intent intent = new Intent(getContext(), UnityPlayerActivity.class);
+                startActivity(intent);
             }
         });
 
@@ -107,10 +63,5 @@ public class FragmentHome extends Fragment {
         SharedPreferences preferences = this.getActivity().getSharedPreferences("tokenUsuario", Context.MODE_PRIVATE);
         String token = preferences.getString("token", "Login required");
         return token;
-    }
-
-    private void getObjetosPlayer() {
-
-
     }
 }
