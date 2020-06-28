@@ -27,6 +27,7 @@ import edu.upc.login.Adaptadores.AdapterInventario;
 import edu.upc.login.Entidades.Inventario;
 import edu.upc.login.Entidades.Item;
 import edu.upc.login.R;
+import edu.upc.login.apiUnity;
 import okhttp3.OkHttpClient;
 import okhttp3.logging.HttpLoggingInterceptor;
 import retrofit2.Call;
@@ -39,9 +40,6 @@ public class FragmentHome extends Fragment {
 
     Button play;
     private API api;
-    StringBuffer o;
-    List<Inventario> objetos = new ArrayList<>();
-    List<Integer> vector = new ArrayList<>();
 
     @Nullable
     @Override
@@ -52,7 +50,7 @@ public class FragmentHome extends Fragment {
         play.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View v) {
-                //Creamos interceptor
+               /* //Creamos interceptor
                 HttpLoggingInterceptor interceptor = new HttpLoggingInterceptor();
                 interceptor.setLevel(HttpLoggingInterceptor.Level.BODY);
 
@@ -95,7 +93,10 @@ public class FragmentHome extends Fragment {
                     public void onFailure(Call<List<Inventario>> call, Throwable t) {
                         Log.e("DSA","Error: No se pudo acceder a la API",t);
                     }
-                });
+                });*/
+               Intent i = new Intent(getContext(), apiUnity.class);
+               i.putExtra("token", obtenerToken());
+               startActivity(i);
             }
         });
 
