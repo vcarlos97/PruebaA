@@ -1,3 +1,4 @@
+include ':unityLibrary-debug'
 include ':unityLibrary-moro8'
 include ':unityLibrary-moro7'
 include ':unityLibrary-moro6'
