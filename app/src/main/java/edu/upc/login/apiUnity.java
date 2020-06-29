@@ -50,14 +50,13 @@ public class apiUnity {
 
     public static void guardarStats(String duracion, int puntos){
         PartidaAdd p = new PartidaAdd();
-        int nivelMax;
+        int nivelMax = 1;
         String token = Singleton.getInstance().getToken();
 
-        if(puntos>=0 && puntos<80) nivelMax = 1;
         if (puntos>=80 && puntos<200) nivelMax=2;
         else if (puntos>=200 && puntos<350) nivelMax=3;
         else if(puntos>=350 && puntos<400) nivelMax=4;
-        else nivelMax=5;
+        else if(puntos>=400) nivelMax=5;
 
         p.setDuracion(duracion);
         p.setIdPartida(0);
