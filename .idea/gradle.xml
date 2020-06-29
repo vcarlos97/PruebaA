@@ -11,13 +11,7 @@
           <set>
             <option value="$PROJECT_DIR$" />
             <option value="$PROJECT_DIR$/app" />
-            <option value="$PROJECT_DIR$/unityLibrary-chuchuchuli" />
-            <option value="$PROJECT_DIR$/unityLibrary-chuli" />
-            <option value="$PROJECT_DIR$/unityLibrary-chuli2" />
             <option value="$PROJECT_DIR$/unityLibrary-debug" />
-            <option value="$PROJECT_DIR$/unityLibrary-debug (1)" />
-            <option value="$PROJECT_DIR$/unityLibrary-debugg" />
-            <option value="$PROJECT_DIR$/unityLibrary-morillo" />
           </set>
         </option>
         <option name="resolveModulePerSourceSet" value="false" />
