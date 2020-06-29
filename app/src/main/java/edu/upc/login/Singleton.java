@@ -17,6 +17,7 @@ import edu.upc.login.Entidades.Inventario;
 import edu.upc.login.Entidades.Item;
 import edu.upc.login.Entidades.Mapa;
 import edu.upc.login.Entidades.Nivel;
+import edu.upc.login.Entidades.PartidaAdd;
 import okhttp3.OkHttpClient;
 import okhttp3.logging.HttpLoggingInterceptor;
 import retrofit2.Call;
@@ -29,7 +30,7 @@ public class Singleton {
     private static Singleton instance;
     private API api;
     List<Inventario> objetos = new ArrayList<>();
-    String mapa;
+    List<Mapa> mapas;
     String enemigos;
     String token;
 
@@ -117,27 +118,26 @@ public class Singleton {
         });
     }
 
-    public String getMapa() {
-        return mapa;
+    public List<Mapa> getMapas() {
+        return mapas;
     }
-    public void setMapa(String mapa) {
-        this.mapa = mapa;
+    public void setMapas(List<Mapa> mapas) {
+        this.mapas = mapas;
     }
 
-    public void requestMapa(int idMapa) {
-        Call<Mapa> call = api.getMapa(idMapa);
-        call.enqueue(new Callback<Mapa>() {
+    public void requestMapas() {
+        Call<List<Mapa>> call = api.getMapas();
+        call.enqueue(new Callback<List<Mapa>>() {
             @Override
-            public void onResponse(Call<Mapa> call, Response<Mapa> response) {
+            public void onResponse(Call<List<Mapa>> call, Response<List<Mapa>> response) {
                 if (response.isSuccessful()) {
-                    Mapa m = response.body();
-                    Singleton.getInstance().setMapa(m.getMapa());
+                    Singleton.getInstance().setMapas(response.body());
                 } else {
                     Log.e("DSA", "Error :" + response.errorBody());
                 }
             }
             @Override
-            public void onFailure(Call<Mapa> call, Throwable t) {
+            public void onFailure(Call<List<Mapa>> call, Throwable t) {
                 Log.e("DSA", "Error: No se pudo acceder a la API", t);
             }
         });
@@ -166,6 +166,38 @@ public class Singleton {
             @Override
             public void onFailure(Call<Nivel> call, Throwable t) {
                 Log.e("DSA", "Error: No se pudo acceder a la API", t);
+            }
+        });
+    }
+
+    public void addGame(PartidaAdd p){
+        Call<Void> call = api.addPartida(p);
+        call.enqueue(new Callback<Void>() {
+            @Override
+            public void onResponse(Call<Void> call, Response<Void> response) {
+                if(response.isSuccessful())
+                    Log.e("DSA", "Partida guardada");
+            }
+
+            @Override
+            public void onFailure(Call<Void> call, Throwable t) {
+                Log.e("DSA", "Casi crack");
+            }
+        });
+    }
+
+    public void addPuntos(String token, int puntos){
+        Call<Void> call = api.addPuntos(token, puntos);
+        call.enqueue(new Callback<Void>() {
+            @Override
+            public void onResponse(Call<Void> call, Response<Void> response) {
+                if(response.isSuccessful())
+                    Log.e("DSA", "Jugador actualizado");
+            }
+
+            @Override
+            public void onFailure(Call<Void> call, Throwable t) {
+                Log.e("DSA", "casi tio");
             }
         });
     }

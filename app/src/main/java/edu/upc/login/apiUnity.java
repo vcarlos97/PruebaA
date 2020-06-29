@@ -14,6 +14,8 @@ import java.lang.reflect.Method;
 import java.util.List;
 
 import edu.upc.login.Entidades.Inventario;
+import edu.upc.login.Entidades.Mapa;
+import edu.upc.login.Entidades.PartidaAdd;
 import edu.upc.login.Fragments.FragmentHome;
 
 public class apiUnity {
@@ -35,8 +37,8 @@ public class apiUnity {
     }
 
     public static String getMapa(int idMapa){
-        Singleton.getInstance().requestMapa(idMapa);
-        String mapa = Singleton.getInstance().getMapa();
+        List<Mapa> mapas = Singleton.getInstance().getMapas();
+        String mapa = mapas.get(idMapa-1).getMapa();
         return mapa;
     }
 
@@ -46,5 +48,25 @@ public class apiUnity {
         return enemigos;
     }
 
+    public static void guardarStats(String duracion, int puntos){
+        PartidaAdd p = new PartidaAdd();
+        int nivelMax;
+        String token = Singleton.getInstance().getToken();
+
+        if(puntos<80) nivelMax = 1;
+        if (puntos>=80 && puntos<200) nivelMax=2;
+        else if (puntos>=200 && puntos<350) nivelMax=3;
+        else if(puntos>=350 && puntos<400) nivelMax=4;
+        else nivelMax=5;
+
+        p.setDuracion(duracion);
+        p.setIdPartida(0);
+        p.setNivelMax(nivelMax);
+        p.setPuntos(puntos);
+        p.setIdJugador(token);
+
+        Singleton.getInstance().addGame(p);
+        Singleton.getInstance().addPuntos(token,puntos);
+    }
 
 }

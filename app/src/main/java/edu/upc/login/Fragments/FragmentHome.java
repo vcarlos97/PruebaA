@@ -16,6 +16,7 @@ import androidx.fragment.app.Fragment;
 import com.unity3d.player.UnityPlayerActivity;
 
 import edu.upc.login.API;
+import edu.upc.login.QuitActivity;
 import edu.upc.login.R;
 import edu.upc.login.Singleton;
 
@@ -34,7 +35,8 @@ public class FragmentHome extends Fragment {
         play.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View v) {
-                Intent intent = new Intent(getContext(), UnityPlayerActivity.class);
+                Singleton.getInstance().requestMapas();
+                Intent intent = new Intent(getContext(), QuitActivity.class);
                 startActivity(intent);
             }
         });

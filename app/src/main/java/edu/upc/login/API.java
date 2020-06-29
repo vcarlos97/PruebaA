@@ -12,6 +12,7 @@ import edu.upc.login.Entidades.LoginCredentials;
 import edu.upc.login.Entidades.Mapa;
 import edu.upc.login.Entidades.Nivel;
 import edu.upc.login.Entidades.Partida;
+import edu.upc.login.Entidades.PartidaAdd;
 import edu.upc.login.Entidades.Ranking;
 import edu.upc.login.Entidades.RegisterCredentials;
 import edu.upc.login.Entidades.Token;
@@ -21,6 +22,7 @@ import retrofit2.http.Body;
 import retrofit2.http.DELETE;
 import retrofit2.http.GET;
 import retrofit2.http.POST;
+import retrofit2.http.Path;
 import retrofit2.http.Query;
 
 public interface API {
@@ -31,15 +33,20 @@ public interface API {
 @GET("game/toppartidas ")
     Call<List<Partida>> getRankingPersonal(@Query("token") String token);
 
-@GET("game/mapa")
-    Call<Mapa> getMapa(@Query("idMapa") int idMapa);
+@GET("game/mapitas")
+    Call<List<Mapa>> getMapas();
 
 @GET("game/enemigos")
     Call<Nivel> getEnemigos(@Query("idNivel") int idNivel);
 
 @POST("game/useobject")
-    Call<Void> useObjeto(Inventario i);
+    Call<Void> useObjeto(@Body Inventario i);
 
+@POST("game/addpartida")
+    Call<Void> addPartida(@Body PartidaAdd p);
+
+@POST("game/puntos/{puntos}")
+    Call<Void> addPuntos(@Query("token") String token, @Path("puntos") int puntos);
 
 //Servicio que pasa un JSON con las credenciales del login y devuelve un token
 //que se guardara en sharedPreferences
