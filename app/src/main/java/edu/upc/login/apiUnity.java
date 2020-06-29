@@ -6,6 +6,7 @@ import android.content.Context;
 import android.content.Intent;
 import android.content.SharedPreferences;
 import android.os.Bundle;
+import android.util.Log;
 
 import com.unity3d.player.UnityPlayerActivity;
 
@@ -37,6 +38,7 @@ public class apiUnity {
     public static String getMapa(int idMapa){
         Singleton.getInstance().requestMapa(idMapa);
         String mapa = Singleton.getInstance().getMapa();
+        Log.e("Mapa?", ""+mapa);
         return mapa;
     }
 

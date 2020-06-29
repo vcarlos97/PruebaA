@@ -38,7 +38,7 @@ public interface API {
     Call<Nivel> getEnemigos(@Query("idNivel") int idNivel);
 
 @POST("game/useobject")
-    Call<Void> useObjeto(Inventario i);
+    Call<Void> useObjeto(@Body Inventario i);
 
 
 //Servicio que pasa un JSON con las credenciales del login y devuelve un token

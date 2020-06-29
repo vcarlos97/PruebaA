@@ -118,10 +118,11 @@ public class Singleton {
     }
 
     public String getMapa() {
+        Log.e("Mapa1:",""+mapa);
         return mapa;
     }
-    public void setMapa(String mapa) {
-        this.mapa = mapa;
+    public void setMapa(Mapa m) {
+        this.mapa = m.getMapa();
     }
 
     public void requestMapa(int idMapa) {
@@ -130,8 +131,7 @@ public class Singleton {
             @Override
             public void onResponse(Call<Mapa> call, Response<Mapa> response) {
                 if (response.isSuccessful()) {
-                    Mapa m = response.body();
-                    Singleton.getInstance().setMapa(m.getMapa());
+                    Singleton.getInstance().setMapa(response.body());
                 } else {
                     Log.e("DSA", "Error :" + response.errorBody());
                 }
