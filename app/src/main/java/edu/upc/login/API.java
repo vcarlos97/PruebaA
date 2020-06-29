@@ -45,8 +45,8 @@ public interface API {
 @POST("game/addpartida")
     Call<Void> addPartida(@Body PartidaAdd p);
 
-@POST("game/puntos/{puntos}")
-    Call<Void> addPuntos(@Query("token") String token, @Path("puntos") int puntos);
+@POST("game/puntos")
+    Call<Void> addPuntos(@Query("token") String token, @Query("puntos") int puntos);
 
 //Servicio que pasa un JSON con las credenciales del login y devuelve un token
 //que se guardara en sharedPreferences
