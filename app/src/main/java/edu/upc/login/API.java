@@ -7,7 +7,10 @@ import java.util.List;
 import edu.upc.login.Entidades.Comentario;
 import edu.upc.login.Entidades.Foro;
 import edu.upc.login.Entidades.Inventario;
+import edu.upc.login.Entidades.Item;
 import edu.upc.login.Entidades.LoginCredentials;
+import edu.upc.login.Entidades.Mapa;
+import edu.upc.login.Entidades.Nivel;
 import edu.upc.login.Entidades.Partida;
 import edu.upc.login.Entidades.Ranking;
 import edu.upc.login.Entidades.RegisterCredentials;
@@ -27,6 +30,16 @@ public interface API {
 
 @GET("game/toppartidas ")
     Call<List<Partida>> getRankingPersonal(@Query("token") String token);
+
+@GET("game/mapa")
+    Call<Mapa> getMapa(@Query("idMapa") int idMapa);
+
+@GET("game/enemigos")
+    Call<Nivel> getEnemigos(@Query("idNivel") int idNivel);
+
+@POST("game/useobject")
+    Call<Void> useObjeto(Inventario i);
+
 
 //Servicio que pasa un JSON con las credenciales del login y devuelve un token
 //que se guardara en sharedPreferences

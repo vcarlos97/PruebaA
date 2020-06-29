@@ -14,6 +14,9 @@ import java.util.ArrayList;
 import java.util.List;
 
 import edu.upc.login.Entidades.Inventario;
+import edu.upc.login.Entidades.Item;
+import edu.upc.login.Entidades.Mapa;
+import edu.upc.login.Entidades.Nivel;
 import okhttp3.OkHttpClient;
 import okhttp3.logging.HttpLoggingInterceptor;
 import retrofit2.Call;
@@ -26,6 +29,9 @@ public class Singleton {
     private static Singleton instance;
     private API api;
     List<Inventario> objetos = new ArrayList<>();
+    String mapa;
+    String enemigos;
+    String token;
 
 
     private Singleton() {
@@ -57,6 +63,14 @@ public class Singleton {
         return this.api;
     }
 
+    public String getToken(){
+        return token;
+    }
+
+    public void setToken(String token){
+        this.token = token;
+    }
+
     public List<Inventario> getObjetos() {
         return objetos;
     }
@@ -64,7 +78,7 @@ public class Singleton {
         this.objetos = o;
     }
 
-    public void requestObjetos(String token) {
+    public void requestObjetos() {
         Call<List<Inventario>> call = api.inventario(token);
         call.enqueue(new Callback<List<Inventario>>() {
             @Override
@@ -81,109 +95,78 @@ public class Singleton {
             }
         });
     }
-    /*public void requestStats() {
 
-        Call<Stats> call = authApi.getStats(username);
-
-        call.enqueue(new Callback<Stats>() {
+    public void updateObjetos(int idObjeto, String token) {
+        Inventario i = new Inventario();
+        i.setIdObjeto(idObjeto);
+        i.setIdJugador(token);
+        Call<Void> call = api.useObjeto(i);
+        call.enqueue(new Callback<Void>() {
             @Override
-            public void onResponse(Call<Stats> call, Response<Stats> response) {
-
-                if (response.isSuccessful())
-                {
-                    Singleton.getInstance().setStats(response.body());
+            public void onResponse(Call<Void> call, Response<Void> response) {
+                if (response.isSuccessful()) {
+                    Log.e("DSA", "Objeto gastado");
+                } else {
+                    Log.e("DSA", "Error :" + response.errorBody());
                 }
             }
-
-            @Override
-            public void onFailure(Call<Stats> call, Throwable t) {
-                t.printStackTrace();
-            }
-        });
-    }
-
-    public void sendStats() {
-        Call<Void> call = authApi.updateStats(username, stats);
-
-        call.enqueue(new Callback<Void>() {
-            @Override
-            public void onResponse(Call<Void> call, Response<Void> response) {
-
-            }
-
             @Override
             public void onFailure(Call<Void> call, Throwable t) {
-
+                Log.e("DSA", "Error: No se pudo acceder a la API", t);
             }
         });
     }
 
-    public void setInventario(Inventario inventario) {
-        this.inventario = inventario;
+    public String getMapa() {
+        return mapa;
+    }
+    public void setMapa(String mapa) {
+        this.mapa = mapa;
     }
 
-    public Inventario getInventario() {
-        return this.inventario;
-    }
-
-    public void requestInventario() {
-        Call<Inventario> call = authApi.getInventory(username);
-
-        call.enqueue(new Callback<Inventario>() {
+    public void requestMapa(int idMapa) {
+        Call<Mapa> call = api.getMapa(idMapa);
+        call.enqueue(new Callback<Mapa>() {
             @Override
-            public void onResponse(Call<Inventario> call, Response<Inventario> response) {
-
-                Singleton.getInstance().setInventario(response.body());
+            public void onResponse(Call<Mapa> call, Response<Mapa> response) {
+                if (response.isSuccessful()) {
+                    Mapa m = response.body();
+                    Singleton.getInstance().setMapa(m.getMapa());
+                } else {
+                    Log.e("DSA", "Error :" + response.errorBody());
+                }
             }
-
             @Override
-            public void onFailure(Call<Inventario> call, Throwable t) {
-
-            }
-        });
-    }
-
-    public void updateInventario() {
-        Call<Void> call = authApi.setInventory(this.inventario);
-
-        call.enqueue(new Callback<Void>() {
-            @Override
-            public void onResponse(Call<Void> call, Response<Void> response) {
-
-            }
-
-            @Override
-            public void onFailure(Call<Void> call, Throwable t) {
-
+            public void onFailure(Call<Mapa> call, Throwable t) {
+                Log.e("DSA", "Error: No se pudo acceder a la API", t);
             }
         });
     }
 
-    public void setMaps(List<Map> maps) {
-        this.map = maps;
+    public String getEnemigos(){
+        return enemigos;
     }
 
-    public Map getMap(int i) {
-        return this.map.get(i - 1);
+    public void setEnemigos(String enemigos){
+        this.enemigos=enemigos;
     }
 
-    public void requestMaps() {
-
-        Call<List<Map>> call = authApi.getMaps();
-
-        call.enqueue(new Callback<List<Map>>() {
+    public void requestEnemigos(int idNivel){
+        Call<Nivel> call = api.getEnemigos(idNivel);
+        call.enqueue(new Callback<Nivel>() {
             @Override
-            public void onResponse(Call<List<Map>> call, Response<List<Map>> response) {
-                if (response.isSuccessful())
-                    Singleton.getInstance().setMaps(response.body());
+            public void onResponse(Call<Nivel> call, Response<Nivel> response) {
+                if (response.isSuccessful()) {
+                    Nivel n = response.body();
+                    Singleton.getInstance().setEnemigos(n.getEnemigos());
+                } else {
+                    Log.e("DSA", "Error :" + response.errorBody());
+                }
             }
-
             @Override
-            public void onFailure(Call<List<Map>> call, Throwable t) {
-
+            public void onFailure(Call<Nivel> call, Throwable t) {
+                Log.e("DSA", "Error: No se pudo acceder a la API", t);
             }
         });
-
-    }*/
-
+    }
 }
