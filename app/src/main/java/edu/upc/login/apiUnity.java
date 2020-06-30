@@ -45,7 +45,7 @@ public class apiUnity {
     public static String getEnemigos(int idNivel){
         Singleton.getInstance().requestEnemigos(idNivel);
         String enemigos = Singleton.getInstance().getEnemigos();
-        return enemigos;
+        return null;
     }
 
     public static void guardarStats(String duracion, int puntos){
